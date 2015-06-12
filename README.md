@@ -8,10 +8,8 @@ JurassiCraft is a mod made to bring prehistoric creatures to the world of Minecr
 Kash
 
 ## Programmers
-Reuxertz
-
-## Creators
 sdj64
+Reuxertz
 
 # Contributing
 Feel free to speed up development and create pull requests. Here's a guide on how to setup your workspace.  
