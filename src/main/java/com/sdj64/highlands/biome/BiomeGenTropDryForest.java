@@ -5,6 +5,7 @@ import java.util.Random;
 import com.sdj64.highlands.HighlandsGenerators;
 import com.sdj64.highlands.HighlandsMod;
 
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.World;
@@ -27,7 +28,7 @@ public class BiomeGenTropDryForest extends BiomeGenBaseHighlands
 	    
         minHeight = 0.2F;
         maxHeight = 0.3F;
-        temperature = 0.9F;
+        temperature = 1.1F;
         rainfall = 0.3F;
         
     }
@@ -42,5 +43,13 @@ public class BiomeGenTropDryForest extends BiomeGenBaseHighlands
     	else if(par1Random.nextInt(2) == 0)
     	return this.worldGeneratorTrees;
     	else return HighlandsGenerators.shrub2Gen;
+    }
+    
+    public void decorate(World world, Random random, BlockPos pos)
+    {
+        super.decorate(world, random, pos);
+        
+        genStandardOre(2, HighlandsGenerators.hlsand, 0, 72, world, random, pos);
+        genStandardOre(theBiomeDecorator.chunkProviderSettings.goldCount/2, theBiomeDecorator.goldGen, theBiomeDecorator.chunkProviderSettings.goldMinHeight, theBiomeDecorator.chunkProviderSettings.goldMaxHeight, world, random, pos);
     }
 }

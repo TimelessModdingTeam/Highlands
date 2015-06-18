@@ -32,7 +32,7 @@ public class HighlandsMod {
 	HLEventManager eventMgr = new HLEventManager();
 	GenerateTrees genTrees = new GenerateTrees();
 	
-	/*
+	/* world types not working yet.
 	public static final WorldType HL = new WorldType("Highlands");
 	public static final WorldType HLLB = new WorldType("Highlands LB");
 	*/

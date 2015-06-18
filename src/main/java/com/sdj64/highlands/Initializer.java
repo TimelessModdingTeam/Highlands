@@ -160,6 +160,7 @@ public class Initializer
 		addSubBiome(HighlandsBiomes.pinelands, HighlandsBiomes.autumnForest, enabledBiomes);
 		addSubBiome(HighlandsBiomes.redwoodForest, HighlandsBiomes.highlandsBiome, enabledBiomes);
 		addSubBiome(HighlandsBiomes.redwoodForest, HighlandsBiomes.lake, enabledBiomes);
+		addSubBiome(HighlandsBiomes.steppe, BiomeGenBase.mesa, enabledBiomes);
 		addSubBiome(HighlandsBiomes.mojave, BiomeGenBase.mesa, enabledBiomes);
 		addSubBiome(HighlandsBiomes.mojave, BiomeGenBase.savanna, enabledBiomes);
 	}

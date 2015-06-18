@@ -50,8 +50,8 @@ public class BiomeGenAlps extends BiomeGenBaseHighlands{
     {
         super.decorate(world, random, pos);
         
-        genStandardOre(12, HighlandsGenerators.hlice, 32, 100);
-        genStandardOre(theBiomeDecorator.chunkProviderSettings.ironCount/2, theBiomeDecorator.ironGen, theBiomeDecorator.chunkProviderSettings.ironMinHeight, theBiomeDecorator.chunkProviderSettings.ironMaxHeight);
+        genStandardOre(12, HighlandsGenerators.hlice, 32, 100, world, random, pos);
+        genStandardOre(theBiomeDecorator.chunkProviderSettings.ironCount/2, theBiomeDecorator.ironGen, theBiomeDecorator.chunkProviderSettings.ironMinHeight, theBiomeDecorator.chunkProviderSettings.ironMaxHeight, world, random, pos);
         
         int i = 3 + random.nextInt(6);
         int j;

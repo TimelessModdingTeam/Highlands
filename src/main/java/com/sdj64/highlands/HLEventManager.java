@@ -7,6 +7,7 @@ import java.util.Random;
 import com.sdj64.highlands.generator.layer.GenLayerHillsHighlands;
 
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.gen.feature.WorldGenBigTree;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate;
 import net.minecraftforge.event.terraingen.SaplingGrowTreeEvent;
 import net.minecraftforge.event.terraingen.WorldTypeEvent;
@@ -31,14 +32,22 @@ public class HLEventManager {
 				HighlandsGenerators.ashGen.generate(e.world, e.rand, e.pos);
 			}
 			*/
-			if(biome.equals(BiomeGenBase.forest) && e.rand.nextInt(25) == 1){
+			if(biome.equals(BiomeGenBase.forest) && e.rand.nextInt(20) == 1){
 				e.setResult(Event.Result.DENY);
 				HighlandsGenerators.greatOakGen.generate(e.world, e.rand, e.pos);
+			}
+			if(biome.equals(BiomeGenBase.forest) && e.rand.nextInt(7) == 1){
+				e.setResult(Event.Result.DENY);
+				new WorldGenBigTree(false).generate(e.world, e.rand, e.pos);
 			}
 			
 			if(biome.equals(BiomeGenBase.birchForest) && e.rand.nextInt(12) == 1){
 				e.setResult(Event.Result.DENY);
 				HighlandsGenerators.poplarGen.generate(e.world, e.rand, e.pos);
+			}
+			
+			if(biome.equals(BiomeGenBase.savanna) && e.rand.nextInt(3) != 1){
+				e.setResult(Event.Result.DENY);
 			}
 			
 			//All the trees will be mine!
@@ -51,12 +60,13 @@ public class HLEventManager {
 		e.newBiomeGens = GenLayerHillsHighlands.initializeAllBiomeGenerators(e.seed, e.worldType, "");
 	}
 	
-	/* Method for testing trees, will maybe be used for Great Oak.
+	// Method for testing trees, will maybe be used to grow Great Oak from a 2x2 oak sapling square.
+	/*
 	@SubscribeEvent
 	public void onSapling(SaplingGrowTreeEvent e)
 	{
 		e.setResult(Event.Result.DENY);
-		MoreTreesMod.ashGen.generate(e.world, e.rand, e.pos);
+		HighlandsGenerators.greatOakSapling.generate(e.world, e.rand, e.pos);
 		
 		System.out.println("Sapling Event!");
 	}

@@ -28,8 +28,8 @@ public class HighlandsGenerators {
 	 */
 	public static WorldGenAbstractTree ashGen = new WorldGenTreeAsh(Blocks.leaves2, Blocks.log2, 0, 0, 8, 13, false);
 	public static WorldGenAbstractTree ashSapling = new WorldGenTreeAsh(Blocks.leaves2, Blocks.log2, 0, 0, 8, 13, true);
-	public static WorldGenAbstractTree greatOakGen = new WorldGenGreatOak(Blocks.leaves, Blocks.log, 0, 0, 16, 20, false);
-	public static WorldGenAbstractTree greatOakSapling = new WorldGenGreatOak(Blocks.leaves, Blocks.log, 0, 0, 16, 20, true);
+	public static WorldGenAbstractTree greatOakGen = new WorldGenGreatOak(Blocks.leaves, Blocks.log, 0, 0, 2, 20, true);
+	public static WorldGenAbstractTree greatOakSapling = new WorldGenGreatOak(Blocks.leaves, Blocks.log, 0, 0, 2, 20, true);
 	public static WorldGenAbstractTree poplarGen = new WorldGenTreePoplar(Blocks.leaves, Blocks.log, 2, 2, 7, 11, false);
 	public static WorldGenAbstractTree poplarSapling = new WorldGenTreePoplar(Blocks.leaves, Blocks.log, 2, 2, 7, 11, true);
 	public static WorldGenAbstractTree eucalyptusGen = new WorldGenTreeEuca(Blocks.leaves, Blocks.log, 2, 2, 14, 22, false);

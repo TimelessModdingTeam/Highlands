@@ -45,7 +45,10 @@ public class BiomeGenBadlands extends BiomeGenBaseHighlands
 
     public void decorate(World world, Random random, BlockPos pos)
     {
+        genStandardOre(6, HighlandsGenerators.stoneInDirt, 64, 128, world, random, pos);
+    	
         super.decorate(world, random, pos);
+        
         int i = 3 + random.nextInt(6);
         int j;
         int k;

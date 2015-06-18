@@ -2,6 +2,7 @@ package com.sdj64.highlands.generator;
 
 import java.util.Random;
 
+import com.sdj64.highlands.HighlandsBiomes;
 import com.sdj64.highlands.HighlandsGenerators;
 import com.sdj64.highlands.HighlandsMod;
 
@@ -29,11 +30,17 @@ public class GenerateTrees implements IWorldGenerator
 			if(biome.biomeID == BiomeGenBase.desert.biomeID+128 && random.nextInt(4) == 1){
 				HighlandsGenerators.palmGen.generate(world, random, pos2);
 			}
-			if(biome.equals(BiomeGenBase.plains) && random.nextInt(6) == 1){
+			if(biome.equals(HighlandsBiomes.meadow) && random.nextInt(32) == 1){
 				HighlandsGenerators.poplarGen.generate(world, random, pos2);
+				HighlandsGenerators.poplarGen.generate(world, random, pos2.east(random.nextInt(16)-7).north(random.nextInt(16)-7));
+				HighlandsGenerators.poplarGen.generate(world, random, pos2.east(random.nextInt(16)-7).north(random.nextInt(16)-7));
+				HighlandsGenerators.poplarGen.generate(world, random, pos2.east(random.nextInt(16)-7).north(random.nextInt(16)-7));
+				HighlandsGenerators.poplarGen.generate(world, random, pos2.east(random.nextInt(16)-7).north(random.nextInt(16)-7));
 			}
-			if(biome.equals(BiomeGenBase.savanna) && random.nextInt(3) == 1){
+			if(biome.equals(BiomeGenBase.savanna) && random.nextInt(45) == 1){
 				HighlandsGenerators.ashGen.generate(world, random, pos2);
+				HighlandsGenerators.ashGen.generate(world, random, pos2.east(random.nextInt(16)-7).north(random.nextInt(16)-7));
+				HighlandsGenerators.ashGen.generate(world, random, pos2.east(random.nextInt(16)-7).north(random.nextInt(16)-7));
 			}
 			if(biome.equals(BiomeGenBase.jungleEdge)){
 				HighlandsGenerators.eucalyptusGen.generate(world, random, pos2);

@@ -5,6 +5,7 @@ import java.util.Random;
 import com.sdj64.highlands.HighlandsGenerators;
 import com.sdj64.highlands.HighlandsMod;
 
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.block.Block;
@@ -31,7 +32,7 @@ public class BiomeGenSteppe extends BiomeGenBaseHighlands
         theBiomeDecorator.flowersPerChunk = 0;
         
         this.minHeight = 0.6F;
-        this.maxHeight = 0.6F;
+        this.maxHeight = 0.62F;
         this.temperature = 0.6F;
         this.rainfall = 0.1F;
     }
@@ -48,6 +49,13 @@ public class BiomeGenSteppe extends BiomeGenBaseHighlands
     public int getModdedBiomeGrassColor(int original)
     {
         return 0xCCB978;
+    }
+    
+    public void decorate(World world, Random random, BlockPos pos)
+    {
+        super.decorate(world, random, pos);
+        
+        genStandardOre(theBiomeDecorator.chunkProviderSettings.redstoneCount/2, theBiomeDecorator.redstoneGen, theBiomeDecorator.chunkProviderSettings.redstoneMinHeight, theBiomeDecorator.chunkProviderSettings.redstoneMaxHeight, world, random, pos);
     }
 }
 

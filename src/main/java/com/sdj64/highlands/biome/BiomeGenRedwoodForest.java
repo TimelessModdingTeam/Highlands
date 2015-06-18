@@ -5,6 +5,7 @@ import java.util.Random;
 import com.sdj64.highlands.HighlandsGenerators;
 import com.sdj64.highlands.HighlandsMod;
 
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.World;
@@ -40,6 +41,13 @@ public class BiomeGenRedwoodForest extends BiomeGenBaseHighlands
     	else if(par1Random.nextInt(2) == 0)
     		return HighlandsGenerators.firGen;
     	else return HighlandsGenerators.shrub2Gen;
+    }
+    
+    public void decorate(World world, Random random, BlockPos pos)
+    {
+        super.decorate(world, random, pos);
+        
+        genStandardOre(theBiomeDecorator.chunkProviderSettings.redstoneCount/2, theBiomeDecorator.redstoneGen, theBiomeDecorator.chunkProviderSettings.redstoneMinHeight, theBiomeDecorator.chunkProviderSettings.redstoneMaxHeight, world, random, pos);
     }
 
 }

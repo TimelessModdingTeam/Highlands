@@ -5,6 +5,7 @@ import java.util.Random;
 import com.sdj64.highlands.HighlandsGenerators;
 import com.sdj64.highlands.HighlandsMod;
 
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.World;
@@ -44,4 +45,11 @@ public class BiomeGenLowlands extends BiomeGenBaseHighlands
         		this.worldGeneratorTrees : HighlandsGenerators.firGen);
     }
 
+    public void decorate(World world, Random random, BlockPos pos)
+    {
+        super.decorate(world, random, pos);
+        
+        genStandardOre(10, HighlandsGenerators.hlwater, 10, 64, world, random, pos);
+        genStandardOre(theBiomeDecorator.chunkProviderSettings.diamondCount/2, theBiomeDecorator.diamondGen, theBiomeDecorator.chunkProviderSettings.diamondMinHeight, theBiomeDecorator.chunkProviderSettings.diamondMaxHeight, world, random, pos);
+    }
 }

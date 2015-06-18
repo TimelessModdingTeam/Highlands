@@ -5,6 +5,7 @@ import java.util.Random;
 import com.sdj64.highlands.HighlandsGenerators;
 import com.sdj64.highlands.HighlandsMod;
 
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.World;
@@ -38,5 +39,12 @@ public class BiomeGenTropHills extends BiomeGenBaseHighlands
     public WorldGenAbstractTree genBigTreeChance(Random par1Random)
     {
         return HighlandsGenerators.eucalyptusGen;
+    }
+    
+    public void decorate(World world, Random random, BlockPos pos)
+    {
+        super.decorate(world, random, pos);
+        
+        genStandardOre(theBiomeDecorator.chunkProviderSettings.coalCount/2, theBiomeDecorator.coalGen, theBiomeDecorator.chunkProviderSettings.coalMinHeight, theBiomeDecorator.chunkProviderSettings.coalMaxHeight, world, random, pos);
     }
 }

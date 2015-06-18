@@ -7,6 +7,7 @@ import com.sdj64.highlands.HighlandsGenerators;
 import com.sdj64.highlands.HighlandsMod;
 
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
@@ -24,9 +25,6 @@ public class BiomeGenMojave extends BiomeGenBaseHighlands
         theBiomeDecorator.grassPerChunk = 5;
         theBiomeDecorator.flowersPerChunk = 0;
         
-        this.topBlock = Blocks.sand.getStateFromMeta(1);
-        this.fillerBlock = Blocks.sand.getStateFromMeta(1);
-        
         this.spawnableCreatureList.clear();
         
         this.minHeight = 0.1F;
@@ -40,15 +38,15 @@ public class BiomeGenMojave extends BiomeGenBaseHighlands
     {
         return (par1Random.nextInt(3) == 0 ? new WorldGenSavannaTree(false) : HighlandsGenerators.shrub2Gen);
     }
-
-    /*
-    public void decorate(World par1World, Random par2Random, int par3, int par4)
+    
+    public void decorate(World world, Random random, BlockPos pos)
     {
-    	biomedec.genOreHighlandsNoCheck(par1World, par2Random, par3, par4, 2, biomedec.HLdirt, 62, 80);
-        biomedec.decorate(par1World, par2Random, par3, par4);
-        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 2, biomedec.goldGen, 0, 32);
-        biomedec.genOreHighlands(par1World, par2Random, par3, par4, 10, biomedec.HLsand, 0, 64);
+        genStandardOre(5, HighlandsGenerators.sandInDirt, 64, 90, world, random, pos);
+    	
+        super.decorate(world, random, pos);
+        
+        genStandardOre(5, HighlandsGenerators.hlsand, 0, 72, world, random, pos);
+        genStandardOre(theBiomeDecorator.chunkProviderSettings.goldCount/2, theBiomeDecorator.goldGen, theBiomeDecorator.chunkProviderSettings.goldMinHeight, theBiomeDecorator.chunkProviderSettings.goldMaxHeight, world, random, pos);
     }
-    */
 	    
 }

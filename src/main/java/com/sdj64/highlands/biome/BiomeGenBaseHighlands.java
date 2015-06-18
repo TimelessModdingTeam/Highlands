@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.util.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
@@ -31,7 +32,7 @@ public abstract class BiomeGenBaseHighlands extends BiomeGenBase
 	 * @param minHeight
 	 * @param maxHeight
 	 */
-    protected void genStandardOre(int blobsPerChunk, WorldGenerator oreGenerator, int minHeight, int maxHeight)
+    protected void genStandardOre(int blobsPerChunk, WorldGenerator oreGenerator, int minHeight, int maxHeight, World world, Random rng, BlockPos pos)
     {
         int l;
 
@@ -55,9 +56,8 @@ public abstract class BiomeGenBaseHighlands extends BiomeGenBase
 
         for (l = 0; l < blobsPerChunk; ++l)
         {
-            BlockPos blockpos = theBiomeDecorator.field_180294_c.add(theBiomeDecorator.randomGenerator.nextInt(16),
-            		theBiomeDecorator.randomGenerator.nextInt(maxHeight - minHeight) + minHeight, theBiomeDecorator.randomGenerator.nextInt(16));
-            oreGenerator.generate(theBiomeDecorator.currentWorld, theBiomeDecorator.randomGenerator, blockpos);
+            BlockPos blockpos = pos.add(rng.nextInt(16), rng.nextInt(maxHeight - minHeight) + minHeight, rng.nextInt(16));
+            oreGenerator.generate(world, rng, blockpos);
         }
     }
 }

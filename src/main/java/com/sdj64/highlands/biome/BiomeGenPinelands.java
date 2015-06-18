@@ -44,6 +44,9 @@ public class BiomeGenPinelands extends BiomeGenBaseHighlands
     public void decorate(World world, Random random, BlockPos pos)
     {
         super.decorate(world, random, pos);
+        
+        genStandardOre(theBiomeDecorator.chunkProviderSettings.ironCount/2, theBiomeDecorator.ironGen, theBiomeDecorator.chunkProviderSettings.ironMinHeight, theBiomeDecorator.chunkProviderSettings.ironMaxHeight, world, random, pos);
+        
         int i = 3 + random.nextInt(6);
         int j;
         int k;

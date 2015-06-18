@@ -5,6 +5,7 @@ import java.util.Random;
 import com.sdj64.highlands.HighlandsGenerators;
 import com.sdj64.highlands.HighlandsMod;
 
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.block.Block;
@@ -30,7 +31,7 @@ public class BiomeGenMeadow extends BiomeGenBaseHighlands
         theBiomeDecorator.generateLakes = false;
         
         minHeight = 0.1F;
-        maxHeight = 0.1F;
+        maxHeight = 0.12F;
         
         temperature = 0.6F;
         rainfall = 0.8F;
@@ -41,4 +42,11 @@ public class BiomeGenMeadow extends BiomeGenBaseHighlands
         return HighlandsGenerators.poplarGen;
     }
 
+    public void decorate(World world, Random random, BlockPos pos)
+    {
+        super.decorate(world, random, pos);
+        
+        genStandardOre(10, HighlandsGenerators.hlwater, 10, 64, world, random, pos);
+        genStandardOre(theBiomeDecorator.chunkProviderSettings.lapisCount/2, theBiomeDecorator.lapisGen, 0, 32, world, random, pos);
+    }
 }
