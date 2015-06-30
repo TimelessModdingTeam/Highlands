@@ -1,19 +1,18 @@
 package com.sdj64.highlands.generator;
 
-import com.google.common.collect.Lists;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
-import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+
+import com.google.common.collect.Lists;
 
 public class WorldGenGreatOak extends WorldGenAbstractTree
 {
@@ -30,8 +29,7 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
     int heightLimit2;
     /** Sets the distance limit for how far away the generator will populate leaves from the base leaf node. */
     int leafDistanceLimit;
-    List field_175948_j;
-    private static final String __OBFID = "CL_00000400";
+    List<FoliageCoordinates> field_175948_j;
     Block leafBlock;
     int leafMeta;
     Block woodBlock;
@@ -225,7 +223,7 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
 
     void func_175941_b()
     {
-        Iterator iterator = this.field_175948_j.iterator();
+        Iterator<FoliageCoordinates> iterator = this.field_175948_j.iterator();
 
         while (iterator.hasNext())
         {
@@ -258,7 +256,7 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
 
     void func_175939_d()
     {
-        Iterator iterator = this.field_175948_j.iterator();
+        Iterator<FoliageCoordinates> iterator = this.field_175948_j.iterator();
 
         while (iterator.hasNext())
         {
@@ -370,7 +368,6 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
     static class FoliageCoordinates extends BlockPos
         {
             private final int field_178000_b;
-            private static final String __OBFID = "CL_00002001";
 
             public FoliageCoordinates(BlockPos p_i45635_1_, int p_i45635_2_)
             {

@@ -39,7 +39,7 @@ public class BiomeGenTropDryForest extends BiomeGenBaseHighlands
     public WorldGenAbstractTree genBigTreeChance(Random par1Random)
     {
     	if(par1Random.nextInt(3) == 0)
-        return HighlandsGenerators.ashGen;
+        return HighlandsGenerators.aspenGen;
     	else if(par1Random.nextInt(2) == 0)
     	return this.worldGeneratorTrees;
     	else return HighlandsGenerators.shrub2Gen;

@@ -26,7 +26,6 @@ public abstract class GenLayerHighlands
     private long chunkSeed;
     /** base seed to the LCG prng provided via the constructor */
     protected long baseSeed;
-    private static final String __OBFID = "CL_00000559";
 
     public static GenLayer[] initializeAllBiomeGenerators(long p_180781_0_, WorldType p_180781_2_, String p_180781_3_)
     {
@@ -195,7 +194,6 @@ public abstract class GenLayerHighlands
                 crashreportcategory.addCrashSection("Biome B ID", Integer.valueOf(biomeIDB));
                 crashreportcategory.addCrashSectionCallable("Biome A", new Callable()
                 {
-                    private static final String __OBFID = "CL_00000560";
                     public String call()
                     {
                         return String.valueOf(biomegenbase);
@@ -203,7 +201,6 @@ public abstract class GenLayerHighlands
                 });
                 crashreportcategory.addCrashSectionCallable("Biome B", new Callable()
                 {
-                    private static final String __OBFID = "CL_00000561";
                     public String call()
                     {
                         return String.valueOf(biomegenbase1);

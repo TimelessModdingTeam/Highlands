@@ -6,8 +6,8 @@ import net.minecraft.world.biome.BiomeGenBase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.sdj64.highlands.HighlandsBiomes;
 import com.sdj64.highlands.biome.BiomeGenBaseHighlands;
+import com.sdj64.highlands.biome.HighlandsBiomes;
 
 public class GenLayerHillsHighlands extends GenLayerHills
 {

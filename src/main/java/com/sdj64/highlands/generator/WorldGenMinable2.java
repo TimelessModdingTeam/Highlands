@@ -1,7 +1,5 @@
 package com.sdj64.highlands.generator;
 
-import com.google.common.base.Predicate;
-
 import java.util.Random;
 
 import net.minecraft.block.state.IBlockState;
@@ -11,6 +9,8 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import com.google.common.base.Predicate;
 
 
 /**

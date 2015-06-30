@@ -1,17 +1,12 @@
 package com.sdj64.highlands.generator;
 
-import java.awt.Point;
-import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLog;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.fml.common.IWorldGenerator;
 
 public abstract class WorldGenMTreeBase extends WorldGenAbstractTree
 {

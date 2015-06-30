@@ -1,23 +1,15 @@
 package com.sdj64.highlands;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import com.sdj64.highlands.generator.layer.GenLayerHillsHighlands;
-
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.feature.WorldGenBigTree;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate;
-import net.minecraftforge.event.terraingen.SaplingGrowTreeEvent;
-import net.minecraftforge.event.terraingen.WorldTypeEvent;
 import net.minecraftforge.event.terraingen.WorldTypeEvent.InitBiomeGens;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class HLEventManager {
+import com.sdj64.highlands.generator.layer.GenLayerHighlands;
 
-	private Random rand = new Random();
+public class HLEventManager {
 	
 	@SubscribeEvent
 	public void onDecorateTree(Decorate e)
@@ -32,6 +24,8 @@ public class HLEventManager {
 				HighlandsGenerators.ashGen.generate(e.world, e.rand, e.pos);
 			}
 			*/
+			
+			/*
 			if(biome.equals(BiomeGenBase.forest) && e.rand.nextInt(20) == 1){
 				e.setResult(Event.Result.DENY);
 				HighlandsGenerators.greatOakGen.generate(e.world, e.rand, e.pos);
@@ -45,19 +39,17 @@ public class HLEventManager {
 				e.setResult(Event.Result.DENY);
 				HighlandsGenerators.poplarGen.generate(e.world, e.rand, e.pos);
 			}
-			
+			*/
 			if(biome.equals(BiomeGenBase.savanna) && e.rand.nextInt(3) != 1){
 				e.setResult(Event.Result.DENY);
 			}
-			
-			//All the trees will be mine!
 		}
 	}
 	
 	@SubscribeEvent
 	public void onGenLayerInitiate(InitBiomeGens e)
 	{
-		e.newBiomeGens = GenLayerHillsHighlands.initializeAllBiomeGenerators(e.seed, e.worldType, "");
+		e.newBiomeGens = GenLayerHighlands.initializeAllBiomeGenerators(e.seed, e.worldType, "");
 	}
 	
 	// Method for testing trees, will maybe be used to grow Great Oak from a 2x2 oak sapling square.

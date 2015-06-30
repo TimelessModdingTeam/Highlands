@@ -1,6 +1,5 @@
 package com.sdj64.highlands;
 
-import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
