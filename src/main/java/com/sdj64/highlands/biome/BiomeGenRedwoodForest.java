@@ -2,8 +2,8 @@ package com.sdj64.highlands.biome;
 
 import java.util.Random;
 
-import com.sdj64.highlands.HighlandsGenerators;
 import com.sdj64.highlands.HighlandsMod;
+import com.sdj64.highlands.generator.HighlandsGenerators;
 
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -20,7 +20,7 @@ public class BiomeGenRedwoodForest extends BiomeGenBaseHighlands
     {
         super(par1);
         
-        theBiomeDecorator.treesPerChunk = 8;
+        theBiomeDecorator.treesPerChunk = 14;
         theBiomeDecorator.grassPerChunk = 5;
         theBiomeDecorator.flowersPerChunk = 0;
 	    

@@ -2,8 +2,8 @@ package com.sdj64.highlands.biome;
 
 import java.util.Random;
 
-import com.sdj64.highlands.HighlandsGenerators;
 import com.sdj64.highlands.HighlandsMod;
+import com.sdj64.highlands.generator.HighlandsGenerators;
 
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -42,7 +42,7 @@ public class BiomeGenHighlands extends BiomeGenBaseHighlands
      */
     public WorldGenAbstractTree genBigTreeChance(Random random)
     {
-        return (random.nextInt(3) != 0 ? HighlandsGenerators.shrubGen : this.worldGeneratorTrees);
+        return (random.nextInt(3) != 0 ? HighlandsGenerators.shrub2Gen : this.worldGeneratorTrees);
     }
     
     public void decorate(World world, Random random, BlockPos pos)

@@ -156,8 +156,10 @@ public class GenLayerHillsHighlands extends GenLayerHills
                     else if (BiomeGenBase.getBiomeGenArray()[k1] instanceof BiomeGenBaseHighlands)
                     {
                     	BiomeGenBaseHighlands hlBiome = (BiomeGenBaseHighlands) BiomeGenBase.getBiomeGenArray()[k1];
-                    	j2 = this.nextInt(hlBiome.subBiomes.size());
-                    	i2 = hlBiome.subBiomes.get(j2).biomeID;
+                    	if(hlBiome.subBiomes.size() > 0){
+	                    	j2 = this.nextInt(hlBiome.subBiomes.size());
+	                    	i2 = hlBiome.subBiomes.get(j2).biomeID;
+                    	}
                     }
 
                     if (flag && i2 != k1)

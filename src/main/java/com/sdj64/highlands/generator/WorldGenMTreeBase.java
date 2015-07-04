@@ -210,7 +210,7 @@ public abstract class WorldGenMTreeBase extends WorldGenAbstractTree
     
     protected void setBlockLeaf(BlockPos pos){
     	try{
-			if(world.isAirBlock(pos)){
+			if(world.isAirBlock(pos) || world.getBlockState(pos).getBlock().equals(Blocks.tallgrass)){
 				world.setBlockState(pos, leaves.getStateFromMeta(leafMeta));
 			}
     	}

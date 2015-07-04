@@ -2,8 +2,8 @@ package com.sdj64.highlands.biome;
 
 import java.util.Random;
 
-import com.sdj64.highlands.HighlandsGenerators;
 import com.sdj64.highlands.HighlandsMod;
+import com.sdj64.highlands.generator.HighlandsGenerators;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.biome.BiomeGenBase;

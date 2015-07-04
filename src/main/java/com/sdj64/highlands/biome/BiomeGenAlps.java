@@ -3,8 +3,8 @@ package com.sdj64.highlands.biome;
 import java.util.List;
 import java.util.Random;
 
-import com.sdj64.highlands.HighlandsGenerators;
 import com.sdj64.highlands.HighlandsMod;
+import com.sdj64.highlands.generator.HighlandsGenerators;
 import com.sdj64.highlands.generator.WorldGenTreeFir;
 
 import net.minecraft.util.BlockPos;
@@ -33,8 +33,8 @@ public class BiomeGenAlps extends BiomeGenBaseHighlands{
 	    this.topBlock = Blocks.snow.getDefaultState();
 	    this.fillerBlock = Blocks.snow.getDefaultState();
 	    
-	    this.maxHeight = 0.8F;
-	    this.minHeight = 0.4F;
+	    this.maxHeight = 3.0F;
+	    this.minHeight = 1.8F;
 	    this.temperature = 0.0F;
 	    this.rainfall = 0.7F;
 	        

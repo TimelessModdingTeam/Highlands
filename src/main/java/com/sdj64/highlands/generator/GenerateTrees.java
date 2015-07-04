@@ -8,7 +8,6 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
-import com.sdj64.highlands.HighlandsGenerators;
 import com.sdj64.highlands.biome.HighlandsBiomes;
 
 public class GenerateTrees implements IWorldGenerator

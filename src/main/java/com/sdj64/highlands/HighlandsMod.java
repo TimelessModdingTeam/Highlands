@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.sdj64.highlands.biome.HighlandsBiomes;
 import com.sdj64.highlands.block.HighlandsBlocks;
@@ -51,7 +52,9 @@ public class HighlandsMod {
 		HighlandsBiomes.setUpBiomeManager();
 		
 		HighlandsBlocks.constructBlocks();
-		if(FMLCommonHandler.instance().getSide().equals(Side.CLIENT)) HighlandsBlocks.registerRenders();
+		if(event.getSide().equals(Side.CLIENT)) HighlandsBlocks.registerRenders();
+		
+		
 	}
 	
 	@EventHandler

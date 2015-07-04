@@ -3,35 +3,34 @@
 <!-- Saplings -->
 tile.highlands_eucaSapling.name=Eucalyptus Sapling
 tile.highlands_deadSapling.name=Dead Tree Sapling
-tile.highlands_greatOakSapling.name=Great Oak Sapling
 tile.highlands_firSapling.name=Fir Sapling
 tile.highlands_poplarSapling.name=Poplar Sapling
-tile.highlands_redwoodSapling.name=Sequoia Sapling
+tile.highlands_redwoodSapling.name=Redwood Sapling
 tile.highlands_evgBushSapling.name=Evergreen Bush Sapling
 tile.highlands_decBushSapling.name=Deciduous Bush Sapling
 tile.highlands_palmSapling.name=Palm Sapling
 tile.highlands_aspenSapling.name=Aspen Sapling
 	
 <!-- Logs -->
-tile.highlands_eucaWood.name=Eucalyptus Wood
-tile.highlands_firWood.name=Fir Wood
-tile.highlands_poplarWood.name=Poplar Wood
-tile.highlands_redwoodWood.name=Sequoia Wood
-tile.highlands_palmWood.name=Palm Wood
-tile.highlands_ashWood.name=Aspen Wood
+tile.highlands_eucalyptus_log.name=Eucalyptus Log
+tile.highlands_fir_log.name=Fir Log
+tile.highlands_poplar_log.name=Poplar Log
+tile.highlands_redwood_log.name=Redwood Log
+tile.highlands_palm_log.name=Palm Log
+tile.highlands_aspen_log.name=Aspen Log
 
-<!-- Wood -->
-tile.highlands_eucaPlanks.name=Eucalyptus Wood Planks
-tile.highlands_firPlanks.name=Fir Wood Planks
-tile.highlands_poplarPlanks.name=Poplar Wood Planks
-tile.highlands_redwoodPlanks.name=Sequoia Wood Planks
-tile.highlands_palmPlanks.name=Palm Wood Planks
-tile.highlands_aspenPlanks.name=Aspen Wood Planks
+<!-- Planks -->
+tile.highlands_eucalyptus_planks.name=Eucalyptus Wood Planks
+tile.highlands_fir_planks.name=Fir Wood Planks
+tile.highlands_poplar_planks.name=Poplar Wood Planks
+tile.highlands_redwood_planks.name=Redwood Wood Planks
+tile.highlands_palm_planks.name=Palm Wood Planks
+tile.highlands_aspen_planks.name=Aspen Wood Planks
 	
 <!-- Leaves -->
-tile.highlands_eucaLeaves.name=Eucalyptus Leaves
-tile.highlands_firLeaves.name=Fir Leaves
-tile.highlands_poplarLeaves.name=Poplar Leaves
-tile.highlands_redwoodLeaves.name=Sequoia Leaves
-tile.highlands_palmLeaves.name=Palm Leaves
-tile.highlands_ashighlandseaves.name=Aspen Leaves
+tile.highlands_eucalyptus_leaves.name=Eucalyptus Leaves
+tile.highlands_fir_leaves.name=Fir Leaves
+tile.highlands_poplar_leaves.name=Poplar Leaves
+tile.highlands_redwood_leaves.name=Redwood Leaves
+tile.highlands_palm_leaves.name=Palm Leaves
+tile.highlands_aspen_leaves.name=Aspen Leaves

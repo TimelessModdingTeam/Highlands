@@ -2,8 +2,8 @@ package com.sdj64.highlands.biome;
 
 import java.util.Random;
 
-import com.sdj64.highlands.HighlandsGenerators;
 import com.sdj64.highlands.HighlandsMod;
+import com.sdj64.highlands.generator.HighlandsGenerators;
 
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
@@ -31,8 +31,8 @@ public class BiomeGenSteppe extends BiomeGenBaseHighlands
         theBiomeDecorator.grassPerChunk = 12;
         theBiomeDecorator.flowersPerChunk = 0;
         
-        this.minHeight = 0.6F;
-        this.maxHeight = 0.62F;
+        this.minHeight = 1.0F;
+        this.maxHeight = 1.0F;
         this.temperature = 0.6F;
         this.rainfall = 0.1F;
     }
