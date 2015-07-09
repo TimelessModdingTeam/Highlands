@@ -22,7 +22,7 @@ public class BiomeGenLake extends BiomeGenBaseHighlands
         theBiomeDecorator.flowersPerChunk = 0;
     	
 	    this.minHeight = -0.5F;
-	    this.maxHeight = 0.1F;
+	    this.maxHeight = 0.05F;
         this.temperature = 0.8F;
         this.rainfall = 0.8F;
 	    

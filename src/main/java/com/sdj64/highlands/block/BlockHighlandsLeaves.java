@@ -47,19 +47,19 @@ public class BlockHighlandsLeaves extends BlockLeaves
     @SideOnly(Side.CLIENT)
     public int getBlockColor()
     {
-        return this.treeType==HighlandsBlocks.EnumType.ASPEN ? 0: ColorizerFoliage.getFoliageColor(0.5D, 1.0D);
+        return this.treeType==HighlandsBlocks.EnumType.ASPEN ? 0xFFFFFF: ColorizerFoliage.getFoliageColor(0.5D, 1.0D);
     }
 
     @SideOnly(Side.CLIENT)
     public int getRenderColor(IBlockState state)
     {
-        return this.treeType==HighlandsBlocks.EnumType.ASPEN ? 0: ColorizerFoliage.getFoliageColorBasic();
+        return this.treeType==HighlandsBlocks.EnumType.ASPEN ? 0xFFFFFF: ColorizerFoliage.getFoliageColorBasic();
     }
 
     @SideOnly(Side.CLIENT)
     public int colorMultiplier(IBlockAccess worldIn, BlockPos pos, int renderPass)
     {
-        return this.treeType==HighlandsBlocks.EnumType.ASPEN ? 0: BiomeColorHelper.getFoliageColorAtPos(worldIn, pos);
+        return this.treeType==HighlandsBlocks.EnumType.ASPEN ? 0xFFFFFF: BiomeColorHelper.getFoliageColorAtPos(worldIn, pos);
     }
     
     public HighlandsBlocks.EnumType getTreeType()

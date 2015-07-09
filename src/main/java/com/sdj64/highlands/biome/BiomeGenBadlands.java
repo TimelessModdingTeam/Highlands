@@ -29,7 +29,7 @@ public class BiomeGenBadlands extends BiomeGenBaseHighlands
         theBiomeDecorator.grassPerChunk = 6;
         theBiomeDecorator.flowersPerChunk = 1;
         
-        this.maxHeight = 0.45F;
+        this.maxHeight = 0.6F;
         this.minHeight = 0.3F;
         this.temperature = 0.6F;
         this.rainfall = 0.1F;

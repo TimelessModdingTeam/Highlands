@@ -27,9 +27,11 @@ public class Config
     public static Property poplarHillsID;
     public static Property tropicalIslandsID;
     public static Property badlandsID;
-    public static Property steppeID;
+    public static Property greyMtnsID;
     public static Property lakeID;
     public static Property baldHillID;
+    public static Property tropHillsID;
+    public static Property dryForestID;
     
     //Biome Generate Properties
 	public static Property highlandsbGenerate;
@@ -42,9 +44,11 @@ public class Config
 	public static Property poplarHillsGenerate;
 	public static Property tropicalIslandsGenerate;
 	public static Property badlandsGenerate;
-	public static Property steppeGenerate;
+	public static Property greyMtnsGenerate;
 	public static Property lakeGenerate;
 	public static Property baldHillGenerate;
+	public static Property tropHillsGenerate;
+	public static Property dryForestGenerate;
 	
 	//Settings Properties
 	public static Property biomePrefix;
@@ -83,14 +87,18 @@ public class Config
 		redwoodForestGenerate = config.get(CATEGORY_BIOME_GENERATE, "Redwood Forest Generate", true);
 		mojaveID = config.get(CATEGORY_BIOME_ID, "Mojave ID", 58);
 		mojaveGenerate = config.get(CATEGORY_BIOME_GENERATE, "Mojave Generate", true);
-		steppeID = config.get(CATEGORY_BIOME_ID, "Steppe ID", 59);
-		steppeGenerate = config.get(CATEGORY_BIOME_GENERATE, "Steppe Generate", true);
+		greyMtnsID = config.get(CATEGORY_BIOME_ID, "Grey Mountains ID", 59);
+		greyMtnsGenerate = config.get(CATEGORY_BIOME_GENERATE, "Grey Mountains Generate", true);
 		tropicalIslandsID = config.get(CATEGORY_BIOME_ID, "Tropical Islands ID", 60);
 		tropicalIslandsGenerate = config.get(CATEGORY_BIOME_GENERATE, "Tropical Islands Generate", true);
 		lakeID = config.get(CATEGORY_SUBBIOME_ID, "Lake ID", 61);
 		lakeGenerate = config.get(CATEGORY_SUBBIOME_GENERATE, "Lake Generate", true);
 		baldHillID = config.get(CATEGORY_SUBBIOME_ID, "Bald Hill ID", 62);
 		baldHillGenerate = config.get(CATEGORY_SUBBIOME_GENERATE, "Bald Hill Generate", true);
+		tropHillsID = config.get(CATEGORY_SUBBIOME_ID, "Tropical Hills ID", 63);
+		tropHillsGenerate = config.get(CATEGORY_SUBBIOME_GENERATE, "Tropical Hills Generate", true);
+		dryForestID = config.get(CATEGORY_SUBBIOME_ID, "Dry Forest ID", 64);
+		dryForestGenerate = config.get(CATEGORY_SUBBIOME_GENERATE, "Dry Forest Generate", true);
 	}
 
 	

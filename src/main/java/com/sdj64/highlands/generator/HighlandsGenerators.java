@@ -28,8 +28,8 @@ public class HighlandsGenerators {
 	public static WorldGenAbstractTree eucalyptusSapling = new WorldGenTreeEuca(HighlandsBlocks.leaves[2], HighlandsBlocks.woods[2], 2, 2, 14, 22, true);
 	public static WorldGenAbstractTree palmGen = new WorldGenTreePalm(HighlandsBlocks.leaves[3], HighlandsBlocks.woods[3], 3, 3, 6, 12, false);
 	public static WorldGenAbstractTree palmSapling = new WorldGenTreePalm(HighlandsBlocks.leaves[3], HighlandsBlocks.woods[3], 3, 3, 6, 12, true);
-	public static WorldGenAbstractTree firGen = new WorldGenTreeFir(HighlandsBlocks.leaves[4], HighlandsBlocks.woods[4], 1, 1, 6, 12, false);
-	public static WorldGenAbstractTree firSapling = new WorldGenTreeFir(HighlandsBlocks.leaves[4], HighlandsBlocks.woods[4], 1, 1, 6, 12, true);
+	public static WorldGenAbstractTree firGen = new WorldGenTreeFir(HighlandsBlocks.leaves[4], HighlandsBlocks.woods[4], 1, 1, 9, 16, false);
+	public static WorldGenAbstractTree firSapling = new WorldGenTreeFir(HighlandsBlocks.leaves[4], HighlandsBlocks.woods[4], 1, 1, 9, 16, true);
 	public static WorldGenAbstractTree redwoodGen = new WorldGenTreeRedwood(HighlandsBlocks.leaves[5], HighlandsBlocks.woods[5], 1, 1, 27, 38, false);
 	public static WorldGenAbstractTree redwoodSapling = new WorldGenTreeRedwood(HighlandsBlocks.leaves[5], HighlandsBlocks.woods[5], 1, 1, 20, 30, true);
 	public static WorldGenAbstractTree shrubGen = new WorldGenHighlandsShrub(Blocks.leaves, Blocks.log, 1, 1, false);

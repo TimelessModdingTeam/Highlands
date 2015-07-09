@@ -24,7 +24,7 @@ public class WorldGenTreePalm extends WorldGenMTreeBase
     	random = rand;
         
         if(!isLegalTreePosition(pos, false, true))return false;
-        if(!isCubeClear(pos.down(-2), 1, 5))return false;
+        if(!isCubeClear(pos.up(2), 1, 5))return false;
     	
     	int locX = pos.getX();
         int locY = pos.getY();
@@ -33,7 +33,7 @@ public class WorldGenTreePalm extends WorldGenMTreeBase
         //generates trunk
     	int treeHeight = minHeight + random.nextInt(maxHeight-minHeight);
     	for(int i = 0; i < treeHeight; i++){
-    		setBlockLog(pos.down(-i), 0);
+    		setBlockLog(pos.up(i), 0);
     	}
     	//generates leaves
     	int h = locY + treeHeight;
@@ -41,14 +41,14 @@ public class WorldGenTreePalm extends WorldGenMTreeBase
     	setBlockLeaf(pos2);
     	int r = 1;
     	genLeafAllDirections(pos2, r);
-    	genLeafAllDirections(pos2.down(-1), r);
+    	genLeafAllDirections(pos2.up(1), r);
     	r++;
     	genLeafAllDirections(pos2, r);
-    	genLeafAllDirections(pos2.down(-2), r);
+    	genLeafAllDirections(pos2.up(2), r);
+    	genLeafAllDirections(pos2.up(3), r);
     	r++;
     	genLeafAllDirections(pos2, r);
     	genLeafAllDirections(pos2.down(), r);
-    	genLeafAllDirections(pos2.down(-2), r);
     	r++;
     	genLeafAllDirections(pos2.down(), r);
     	

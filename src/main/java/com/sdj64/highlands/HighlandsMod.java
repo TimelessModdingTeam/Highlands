@@ -2,6 +2,8 @@ package com.sdj64.highlands;
 
 import java.io.File;
 
+import net.minecraft.world.WorldType;
+import net.minecraft.world.gen.ChunkProviderSettings;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -24,10 +26,8 @@ public class HighlandsMod {
 	HLEventManager eventMgr = new HLEventManager();
 	GenerateTrees genTrees = new GenerateTrees();
 	
-	/* world types not working yet.
-	public static final WorldType HL = new WorldType("Highlands");
-	public static final WorldType HLLB = new WorldType("Highlands LB");
-	*/
+	public static WorldType worldTypeHighlands;
+	public static WorldType worldTypeHighlandsLB;
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -39,11 +39,16 @@ public class HighlandsMod {
 		config.load();
 		Config.setUpConfig(config);
 		config.save();
+		
+		
 	}
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
+		worldTypeHighlands = new WorldTypeHighlands("Highlands");
+		worldTypeHighlandsLB = new WorldTypeHighlands("Highlands LB");
+		
 		GameRegistry.registerWorldGenerator(genTrees, 1);
 		
 		HighlandsSettings.constructSettings();
@@ -54,7 +59,7 @@ public class HighlandsMod {
 		HighlandsBlocks.constructBlocks();
 		if(event.getSide().equals(Side.CLIENT)) HighlandsBlocks.registerRenders();
 		
-		
+		ChunkProviderSettings.Factory.func_177865_a("yes");
 	}
 	
 	@EventHandler

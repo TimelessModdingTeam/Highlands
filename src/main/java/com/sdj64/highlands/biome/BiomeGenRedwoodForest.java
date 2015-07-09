@@ -5,6 +5,7 @@ import java.util.Random;
 import com.sdj64.highlands.HighlandsMod;
 import com.sdj64.highlands.generator.HighlandsGenerators;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeDecorator;
@@ -24,10 +25,12 @@ public class BiomeGenRedwoodForest extends BiomeGenBaseHighlands
         theBiomeDecorator.grassPerChunk = 5;
         theBiomeDecorator.flowersPerChunk = 0;
 	    
-        minHeight = 0.3F;
-        maxHeight = 0.3F;
+        minHeight = 0.5F;
+        maxHeight = 0.7F;
         temperature = 0.6F;
         rainfall = 0.2F;
+        
+        this.topBlock = Blocks.dirt.getStateFromMeta(2);
         
     }
 

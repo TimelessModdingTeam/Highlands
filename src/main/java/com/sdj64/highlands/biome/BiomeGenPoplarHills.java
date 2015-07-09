@@ -26,7 +26,7 @@ public class BiomeGenPoplarHills extends BiomeGenBaseHighlands
         theBiomeDecorator.flowersPerChunk = 4;
         
         minHeight = -0.1F;
-        maxHeight = 0.4F;
+        maxHeight = 0.6F;
         temperature = 0.6F;
         rainfall = 0.8F;
     }

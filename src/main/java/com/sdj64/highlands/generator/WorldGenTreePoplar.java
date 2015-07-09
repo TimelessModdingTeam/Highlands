@@ -40,7 +40,7 @@ public class WorldGenTreePoplar extends WorldGenMTreeBase
     	generateLeafLayerCircle(1.5, locX, locZ, h);
     	
     	for(h = h + 1; h < locY + treeHeight; h++){
-    		generateLeafLayerCircleNoise(1.8, locX, locZ, h);
+    		generateLeafLayerCircleNoise(2.1, locX, locZ, h);
     	}
     	generateLeafLayerCircleNoise(1.5, locX, locZ, h);
     	h++;

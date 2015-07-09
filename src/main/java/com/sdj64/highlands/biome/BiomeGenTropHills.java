@@ -27,7 +27,7 @@ public class BiomeGenTropHills extends BiomeGenBaseHighlands
         theBiomeDecorator.flowersPerChunk = 1;
 	    
         minHeight = 0.4F;
-        maxHeight = 0.6F;
+        maxHeight = 1.2F;
         temperature = 0.95F;
         rainfall = 1.0F;
         

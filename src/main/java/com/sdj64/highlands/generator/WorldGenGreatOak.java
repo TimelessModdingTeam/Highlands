@@ -322,12 +322,17 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
         }
         else
         {
-            this.generateLeafNodeList();
-            this.func_175941_b();
-            this.func_175942_c();
-            this.func_175939_d();
-            this.world = null; //Fix vanilla Mem leak, holds latest world
-            return true;
+        	try{
+	            this.generateLeafNodeList();
+	            this.func_175941_b();
+	            this.func_175942_c();
+	            this.func_175939_d();
+	            this.world = null; //Fix vanilla Mem leak, holds latest world
+	            return true;
+        	}
+        	catch(Exception e){
+        		return false;
+        	}
         }
     }
 

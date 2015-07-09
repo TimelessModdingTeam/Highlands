@@ -30,8 +30,8 @@ public class BiomeGenHighlands extends BiomeGenBaseHighlands
         theBiomeDecorator.grassPerChunk = 12;
         theBiomeDecorator.flowersPerChunk = 6;
 	    
-        minHeight = 0.3F;
-        maxHeight = 0.5F;
+        minHeight = 0.4F;
+        maxHeight = 0.8F;
         temperature = 0.6F;
         rainfall = 0.2F;
         

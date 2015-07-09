@@ -35,21 +35,21 @@ public class WorldGenTreeEuca extends WorldGenMTreeBase
     	//generates leaves
     	int h = locY+treeHeight - 5;
     	generateLeafLayerCircleNoise(1.3, locX, locZ, h);
-    	generateLeafLayerCircleNoise(2.0, locX, locZ, h++);
+    	generateLeafLayerCircleNoise(2.0, locX, locZ, (h+1));
     	int i;
-    	for(i = 0; i < random.nextInt(2)+2; i++){
+    	for(i = 1; i < random.nextInt(2)+2; i++){
         	generateLeafLayerCircleNoise(2.5, locX, locZ, h+i+1);
     	}
-    	generateLeafLayerCircleNoise(3.5, locX, locZ, h+i+2);
-    	generateLeafLayerCircleNoise(4.5, locX, locZ, h+i+3);
+    	generateLeafLayerCircleNoise(3.5, locX, locZ, h+i+1);
+    	generateLeafLayerCircleNoise(4.5, locX, locZ, h+i+2);
     	generateLeafLayerCircleNoise(2.5, locX, locZ, h+i+3);
-    	generateLeafLayerCircleNoise(1.5, locX, locZ, h+i+3);
+    	generateLeafLayerCircleNoise(1.5, locX, locZ, h+i+4);
     	
     	if(random.nextBoolean()){
     		h = locY + treeHeight - 8;
-    		generateLeafLayerCircleNoise(1.2, locX, locZ, h);
-    		generateLeafLayerCircleNoise(1.8, locX, locZ, h++);
-    		generateLeafLayerCircleNoise(1.52, locX, locZ, h+2);
+    		generateLeafLayerCircleNoise(1.2, locX, locZ, (h-1));
+    		generateLeafLayerCircleNoise(1.8, locX, locZ, h);
+    		generateLeafLayerCircleNoise(1.2, locX, locZ, (h+1));
     	}
     	return true;
     }

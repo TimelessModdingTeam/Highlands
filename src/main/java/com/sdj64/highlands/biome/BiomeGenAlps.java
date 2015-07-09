@@ -34,7 +34,7 @@ public class BiomeGenAlps extends BiomeGenBaseHighlands{
 	    this.fillerBlock = Blocks.snow.getDefaultState();
 	    
 	    this.maxHeight = 3.0F;
-	    this.minHeight = 1.8F;
+	    this.minHeight = 2.5F;
 	    this.temperature = 0.0F;
 	    this.rainfall = 0.7F;
 	        

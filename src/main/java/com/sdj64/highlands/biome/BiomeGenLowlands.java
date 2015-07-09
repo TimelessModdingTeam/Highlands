@@ -29,7 +29,7 @@ public class BiomeGenLowlands extends BiomeGenBaseHighlands
         theBiomeDecorator.generateLakes = false;
         
         minHeight = -0.1F;
-        maxHeight = 0.25F;
+        maxHeight = 0.3F;
         temperature = 0.5F;
         rainfall = 1.2F;
         

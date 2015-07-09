@@ -27,8 +27,8 @@ public class BiomeGenMojave extends BiomeGenBaseHighlands
         
         this.spawnableCreatureList.clear();
         
-        this.minHeight = 0.1F;
-        this.maxHeight = 0.3F;
+        this.minHeight = 0.2F;
+        this.maxHeight = 0.7F;
         this.temperature = 1.6F;
         this.rainfall = 0.1F;
     }

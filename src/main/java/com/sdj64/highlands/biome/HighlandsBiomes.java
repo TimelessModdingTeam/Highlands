@@ -36,7 +36,9 @@ public class HighlandsBiomes {
     public static BiomeGenBase poplarHills;
     public static BiomeGenBase tropicalIslands;
     public static BiomeGenBase badlands;
-    public static BiomeGenBase steppe;
+    public static BiomeGenBase greyMtns;
+    public static BiomeGenBase tropHills;
+    public static BiomeGenBase dryForest;
     
     //Sub Biomes
     public static BiomeGenBase lake;
@@ -46,8 +48,9 @@ public class HighlandsBiomes {
     //ArrayList of biomes for the Highlands worldtype
     public static ArrayList<BiomeGenBase> biomesForHighlands = new ArrayList<BiomeGenBase>();
     
-    //ArrayList of Highlands biomes (not including default ones, these will be added to the default world
-    public static ArrayList<BiomeGenBase> biomesForDefault = new ArrayList<BiomeGenBase>();
+    //ArrayList of Highlands biomes not including default ones, these will be added to the default world
+    //Currently not used since BiomeManager doesn't really do different biomes for different world types
+    //public static ArrayList<BiomeGenBase> biomesForDefault = new ArrayList<BiomeGenBase>();
     
     //ArrayList of sub-biomes, controls which Highlands biomes generate as sub-biomes (currently used for Lake and Bald Hill)
     public static ArrayList<BiomeGenBase> subBiomes = new ArrayList<BiomeGenBase>();
@@ -107,15 +110,25 @@ private static String biomePrefix = "";
 			mojave = new BiomeGenMojave(Config.mojaveID.getInt()).setBiomeName(biomePrefix+"Mojave");
 			biomesForHighlands.add(mojave);
 		}
-		if(Config.steppeGenerate.getBoolean(true))
+		if(Config.greyMtnsGenerate.getBoolean(true))
 		{
-			steppe = new BiomeGenSteppe(Config.steppeID.getInt()).setBiomeName(biomePrefix+"Steppe");
-			biomesForHighlands.add(steppe);
+			greyMtns = new BiomeGenGreyMountains(Config.greyMtnsID.getInt()).setBiomeName(biomePrefix+"Grey Mountains");
+			biomesForHighlands.add(greyMtns);
 		}
 		if(Config.tropicalIslandsGenerate.getBoolean(true))
 		{
 			tropicalIslands = new BiomeGenTropicalIslands(Config.tropicalIslandsID.getInt()).setBiomeName(biomePrefix+"Tropical Islands");
 			biomesForHighlands.add(tropicalIslands);
+		}
+		if(Config.tropHillsGenerate.getBoolean(true))
+		{
+			tropHills = new BiomeGenTropHills(Config.tropHillsID.getInt()).setBiomeName(biomePrefix+"Tropical Hills");
+			biomesForHighlands.add(tropHills);
+		}
+		if(Config.dryForestGenerate.getBoolean(true))
+		{
+			dryForest = new BiomeGenTropDryForest(Config.tropHillsID.getInt()).setBiomeName(biomePrefix+"Dry Forest");
+			biomesForHighlands.add(dryForest);
 		}
 		
 		//sub-biomes
@@ -128,12 +141,6 @@ private static String biomePrefix = "";
 		{
 			baldHill = new BiomeGenBaldHill(Config.baldHillID.getInt()).setBiomeName(biomePrefix+"Bald Hill");
 			subBiomes.add(baldHill);
-		}
-		
-		//sets up default world biome array
-		if(HighlandsSettings.highlandsInDefaultFlag)
-		{
-			
 		}
 	}
 	
@@ -157,9 +164,10 @@ private static String biomePrefix = "";
 		addSubBiome(pinelands, autumnForest, enabledBiomes);
 		addSubBiome(redwoodForest, highlandsBiome, enabledBiomes);
 		addSubBiome(redwoodForest, lake, enabledBiomes);
-		addSubBiome(steppe, BiomeGenBase.mesa, enabledBiomes);
 		addSubBiome(mojave, BiomeGenBase.mesa, enabledBiomes);
 		addSubBiome(mojave, BiomeGenBase.savanna, enabledBiomes);
+		addSubBiome(tropHills, lake, enabledBiomes);
+		addSubBiome(dryForest, BiomeGenBase.savanna, enabledBiomes);
 	}
 	
 	public static void addSubBiome(BiomeGenBase parent, BiomeGenBase sub, ArrayList<BiomeGenBase> list)
@@ -185,10 +193,10 @@ private static String biomePrefix = "";
 				BiomeManager.addSpawnBiome(hlb);
 				BiomeManager.addStrongholdBiome(hlb);
 				if(hlb.equals(meadow) || hlb.equals(highlandsBiome)
-						|| hlb.equals(lowlands) || hlb.equals(steppe)
-						|| hlb.equals(mojave))
+						|| hlb.equals(lowlands) || hlb.equals(mojave))
 					BiomeManager.addVillageBiome(hlb, true);
 			}
+			BiomeManager.addVillageBiome(BiomeGenBase.icePlains, true);
 		}
 	}
     

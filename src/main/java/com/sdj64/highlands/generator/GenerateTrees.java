@@ -6,6 +6,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.feature.WorldGenBigTree;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 import com.sdj64.highlands.biome.HighlandsBiomes;
@@ -47,8 +48,11 @@ public class GenerateTrees implements IWorldGenerator
 				HighlandsGenerators.eucalyptusGen.generate(world, random, pos2.east(random.nextInt(16)-7).north(random.nextInt(16)-7));
 			}
 			
-			if(biome.equals(BiomeGenBase.forest) && random.nextInt(10) == 1){
+			if(biome.equals(BiomeGenBase.forest) && random.nextInt(12) == 1){
 				HighlandsGenerators.greatOakGen.generate(world, random, pos2);
+			}
+			if(biome.equals(BiomeGenBase.forest) && random.nextInt(4) == 1){
+				new WorldGenBigTree(false).generate(world, random, pos2);
 			}
 			
 			

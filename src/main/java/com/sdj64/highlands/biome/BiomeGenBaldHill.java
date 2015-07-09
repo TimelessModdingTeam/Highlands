@@ -19,8 +19,8 @@ public class BiomeGenBaldHill extends BiomeGenBaseHighlands
         theBiomeDecorator.grassPerChunk = 4;
         theBiomeDecorator.flowersPerChunk = 3;
         
-        this.minHeight = 0.7F;
-        this.maxHeight = 0.7F;
+        this.minHeight = 1.1F;
+        this.maxHeight = 1.1F;
         this.temperature = 0.5F;
         this.rainfall = 0.7F;
         

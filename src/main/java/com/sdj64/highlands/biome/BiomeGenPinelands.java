@@ -27,7 +27,7 @@ public class BiomeGenPinelands extends BiomeGenBaseHighlands
         theBiomeDecorator.grassPerChunk = 6;
         theBiomeDecorator.flowersPerChunk = 0;
 	    
-        maxHeight = 0.6F;
+        maxHeight = 0.8F;
         minHeight = 0.3F;
         temperature = 0.5F;
         rainfall = 0.6F;
