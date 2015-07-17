@@ -12,7 +12,9 @@ import net.minecraft.item.ItemStack;
 public class BlockHighlandsLog extends BlockLog
 {
 
-    public BlockHighlandsLog(String treeName)
+	private HighlandsBlocks.EnumType treeType;
+	
+    public BlockHighlandsLog(HighlandsBlocks.EnumType type, String treeName)
     {
         this.setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
         setHardness(2.0F);
@@ -21,6 +23,28 @@ public class BlockHighlandsLog extends BlockLog
         setUnlocalizedName(treeName + "_log");
         
         this.setCreativeTab(HighlandsBlocks.tabHighlands);
+        
+        treeType = type;
+        
+        if(type.equals(HighlandsBlocks.EnumType.BAMBOO)){
+            this.setBlockBounds(0.375F, 0.0F, 0.375F, 0.625F, 1.0F, 0.625F);
+            this.setLightOpacity(1);
+            setHardness(1.0F);
+        }
+        
+        
+    }
+    
+    public boolean isOpaqueCube()
+    {
+    	if(treeType == null)return true;
+        return !treeType.equals(HighlandsBlocks.EnumType.BAMBOO);
+    }
+
+    public boolean isFullCube()
+    {
+    	if(treeType == null)return true;
+        return !treeType.equals(HighlandsBlocks.EnumType.BAMBOO);
     }
 
     /**

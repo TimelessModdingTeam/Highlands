@@ -1,5 +1,5 @@
 {
-    "parent": "block/eucalyptus_leaves",
+    "parent": "highlands:block/eucalyptus_leaves",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

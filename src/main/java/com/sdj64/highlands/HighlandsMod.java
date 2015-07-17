@@ -59,7 +59,7 @@ public class HighlandsMod {
 		HighlandsBlocks.constructBlocks();
 		if(event.getSide().equals(Side.CLIENT)) HighlandsBlocks.registerRenders();
 		
-		ChunkProviderSettings.Factory.func_177865_a("yes");
+		HighlandsRecipes.init();
 	}
 	
 	@EventHandler

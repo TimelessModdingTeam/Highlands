@@ -17,7 +17,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class HighlandsBlocks {
 
-	public static final int NUM_TREE_TYPES = 6;
+	public static final int NUM_TREE_TYPES = 7;
 	
 	public static final CreativeTabs tabHighlands = new CreativeTabs("Highlands")
     {
@@ -50,6 +50,7 @@ public class HighlandsBlocks {
 		EnumType.PALM.setMetaLookup();
 		EnumType.FIR.setMetaLookup();
 		EnumType.REDWOOD.setMetaLookup();
+		EnumType.BAMBOO.setMetaLookup();
 		
 		//initialize arrays
 		planks = new Block[NUM_TREE_TYPES];
@@ -65,18 +66,29 @@ public class HighlandsBlocks {
 		//initialize blocks within arrays
 		for(int i = 0; i < NUM_TREE_TYPES; i++)
 		{
-			planks[i] = new BlockHighlandsPlanks(References.MOD_ID + "_" + EnumType.META_LOOKUP[i].getName());
-			woods[i] = new BlockHighlandsLog(References.MOD_ID + "_" + EnumType.META_LOOKUP[i].getName());
+			planks[i] = new BlockHighlandsPlanks(EnumType.META_LOOKUP[i], References.MOD_ID + "_" + EnumType.META_LOOKUP[i].getName());
+			woods[i] = new BlockHighlandsLog(EnumType.META_LOOKUP[i], References.MOD_ID + "_" + EnumType.META_LOOKUP[i].getName());
 			leaves[i] = new BlockHighlandsLeaves(EnumType.META_LOOKUP[i], References.MOD_ID + "_" + EnumType.META_LOOKUP[i].getName());
+			saplings[i] = new BlockHighlandsSapling(EnumType.META_LOOKUP[i], References.MOD_ID + "_" + EnumType.META_LOOKUP[i].getName());
+			
+			System.out.println(planks[i].getUnlocalizedName());
+			System.out.println(woods[i].getUnlocalizedName());
+			System.out.println(leaves[i].getUnlocalizedName());
+			System.out.println(saplings[i].getUnlocalizedName());
 			
 			GameRegistry.registerBlock(planks[i], planks[i].getUnlocalizedName().substring(15));
 			GameRegistry.registerBlock(woods[i], woods[i].getUnlocalizedName().substring(15));
 			GameRegistry.registerBlock(leaves[i], leaves[i].getUnlocalizedName().substring(15));
+			GameRegistry.registerBlock(saplings[i], saplings[i].getUnlocalizedName().substring(15));
 			
 			OreDictionary.registerOre("logWood", woods[i]);
 			OreDictionary.registerOre("plankWood", planks[i]);
 			OreDictionary.registerOre("treeLeaves", leaves[i]);
+			OreDictionary.registerOre("treeSapling", saplings[i]);
 			
+			Blocks.fire.setFireInfo(leaves[i], 30, 60);
+			Blocks.fire.setFireInfo(planks[i], 5, 20);
+			Blocks.fire.setFireInfo(woods[i], 5, 5);
 		}
 
 		
@@ -89,7 +101,7 @@ public class HighlandsBlocks {
 			registerRender(planks[i]);
 			registerRender(woods[i]);
 			registerRender(leaves[i]);
-			//registerRender(saplings[i]);
+			registerRender(saplings[i]);
 		}
 	}
 	
@@ -99,16 +111,22 @@ public class HighlandsBlocks {
 		
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, 
 				new ModelResourceLocation(References.MOD_ID + ":" + item.getUnlocalizedName().substring(15), "inventory"));
+		/*
 		if(block instanceof BlockHighlandsLeaves){
+			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, 
+					new ModelResourceLocation(References.MOD_ID + ":" + item.getUnlocalizedName().substring(15), "check_decay=false,decayable=false"));
 			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, 
 					new ModelResourceLocation(References.MOD_ID + ":" + item.getUnlocalizedName().substring(15), "check_decay=true,decayable=false"));
 			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, 
-					new ModelResourceLocation(References.MOD_ID + ":" + item.getUnlocalizedName().substring(15), "check_decay=true,decayable=true"));
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, 
 					new ModelResourceLocation(References.MOD_ID + ":" + item.getUnlocalizedName().substring(15), "check_decay=false,decayable=true"));
 			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, 
-					new ModelResourceLocation(References.MOD_ID + ":" + item.getUnlocalizedName().substring(15), "check_decay=false,decayable=false"));
+					new ModelResourceLocation(References.MOD_ID + ":" + item.getUnlocalizedName().substring(15), "check_decay=true,decayable=true"));
 		}
+		if(block instanceof BlockHighlandsSapling){
+			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, 
+					new ModelResourceLocation(References.MOD_ID + ":" + item.getUnlocalizedName().substring(15), "stage=0"));
+		}
+		*/
 	}
 	
 	
@@ -121,7 +139,8 @@ public class HighlandsBlocks {
         EUCA(2, "eucalyptus"),
         PALM(3, "palm"),
         FIR(4, "fir"),
-        REDWOOD(5, "redwood");
+        REDWOOD(5, "redwood"),
+		BAMBOO(6, "bamboo");
         private static final EnumType[] META_LOOKUP = new EnumType[values().length];
         private final int meta;
         private final String name;

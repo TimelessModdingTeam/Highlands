@@ -1,15 +1,15 @@
 <!-- Blocks -->
 
 <!-- Saplings -->
-tile.highlands_eucaSapling.name=Eucalyptus Sapling
-tile.highlands_deadSapling.name=Dead Tree Sapling
-tile.highlands_firSapling.name=Fir Sapling
-tile.highlands_poplarSapling.name=Poplar Sapling
-tile.highlands_redwoodSapling.name=Redwood Sapling
-tile.highlands_evgBushSapling.name=Evergreen Bush Sapling
-tile.highlands_decBushSapling.name=Deciduous Bush Sapling
-tile.highlands_palmSapling.name=Palm Sapling
-tile.highlands_aspenSapling.name=Aspen Sapling
+tile.highlands_eucalyptus_sapling.name=Eucalyptus Sapling
+tile.highlands_fir_sapling.name=Fir Sapling
+tile.highlands_poplar_sapling.name=Poplar Sapling
+tile.highlands_redwood_sapling.name=Redwood Sapling
+tile.highlands_evg_bush_sapling.name=Evergreen Bush Sapling
+tile.highlands_dec_bush_sapling.name=Deciduous Bush Sapling
+tile.highlands_palm_sapling.name=Palm Sapling
+tile.highlands_aspen_sapling.name=Aspen Sapling
+tile.highlands_bamboo_sapling.name=Bamboo Sapling
 	
 <!-- Logs -->
 tile.highlands_eucalyptus_log.name=Eucalyptus Log
@@ -18,6 +18,7 @@ tile.highlands_poplar_log.name=Poplar Log
 tile.highlands_redwood_log.name=Redwood Log
 tile.highlands_palm_log.name=Palm Log
 tile.highlands_aspen_log.name=Aspen Log
+tile.highlands_bamboo_log.name=Bamboo Stem
 
 <!-- Planks -->
 tile.highlands_eucalyptus_planks.name=Eucalyptus Wood Planks
@@ -26,6 +27,7 @@ tile.highlands_poplar_planks.name=Poplar Wood Planks
 tile.highlands_redwood_planks.name=Redwood Wood Planks
 tile.highlands_palm_planks.name=Palm Wood Planks
 tile.highlands_aspen_planks.name=Aspen Wood Planks
+tile.highlands_bamboo_planks.name=Bamboo Planks
 	
 <!-- Leaves -->
 tile.highlands_eucalyptus_leaves.name=Eucalyptus Leaves
@@ -34,3 +36,4 @@ tile.highlands_poplar_leaves.name=Poplar Leaves
 tile.highlands_redwood_leaves.name=Redwood Leaves
 tile.highlands_palm_leaves.name=Palm Leaves
 tile.highlands_aspen_leaves.name=Aspen Leaves
+tile.highlands_bamboo_leaves.name=Bamboo Leaves

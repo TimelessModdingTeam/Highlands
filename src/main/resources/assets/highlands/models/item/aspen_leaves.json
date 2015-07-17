@@ -1,5 +1,5 @@
 {
-    "parent": "block/aspen_leaves",
+    "parent": "highlands:block/aspen_leaves",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

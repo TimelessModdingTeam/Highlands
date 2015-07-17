@@ -7,7 +7,9 @@ import net.minecraft.creativetab.CreativeTabs;
 public class BlockHighlandsPlanks extends Block
 {
 	
-    public BlockHighlandsPlanks(String treeName)
+	private HighlandsBlocks.EnumType treeType;
+	
+    public BlockHighlandsPlanks(HighlandsBlocks.EnumType type, String treeName)
     {
     	super(Material.wood);
     	setHardness(2.0F);
@@ -16,5 +18,7 @@ public class BlockHighlandsPlanks extends Block
         setUnlocalizedName(treeName + "_planks");
         
         this.setCreativeTab(HighlandsBlocks.tabHighlands);
+        
+        treeType = type;
     }
 }

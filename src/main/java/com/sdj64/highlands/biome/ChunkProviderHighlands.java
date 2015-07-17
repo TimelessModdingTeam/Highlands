@@ -165,7 +165,7 @@ public class ChunkProviderHighlands implements IChunkProvider{
                 this.parabolicField[j + 2 + (k + 2) * 5] = f;
                 
                 ////////////////////////////////////////
-                System.out.println(this.parabolicField);
+                //System.out.println(this.parabolicField);
             }
         }
 

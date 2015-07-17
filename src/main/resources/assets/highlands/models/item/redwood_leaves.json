@@ -1,5 +1,5 @@
 {
-    "parent": "block/redwood_leaves",
+    "parent": "highlands:block/redwood_leaves",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

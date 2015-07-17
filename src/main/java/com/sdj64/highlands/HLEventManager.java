@@ -1,11 +1,16 @@
 package com.sdj64.highlands;
 
+import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.BlockSapling;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.ChunkProviderGenerate;
 import net.minecraft.world.gen.feature.WorldGenBigTree;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate;
+import net.minecraftforge.event.terraingen.SaplingGrowTreeEvent;
 import net.minecraftforge.event.terraingen.WorldTypeEvent.BiomeSize;
 import net.minecraftforge.event.terraingen.WorldTypeEvent.InitBiomeGens;
 import net.minecraftforge.event.world.WorldEvent;
@@ -13,6 +18,7 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.sdj64.highlands.biome.ChunkProviderHighlands;
+import com.sdj64.highlands.generator.HighlandsGenerators;
 import com.sdj64.highlands.generator.layer.GenLayerHighlands;
 
 public class HLEventManager {
@@ -69,17 +75,52 @@ public class HLEventManager {
 		}
 	}
 	
-	// Method for testing trees, will maybe be used to grow Great Oak from a 2x2 oak sapling square.
-	/*
+	//used to grow Great Oak from a 2x2 oak sapling square
 	@SubscribeEvent
 	public void onSapling(SaplingGrowTreeEvent e)
 	{
-		e.setResult(Event.Result.DENY);
-		HighlandsGenerators.greatOakSapling.generate(e.world, e.rand, e.pos);
+		boolean flagSquare = false;
+		BlockPos treeGrowPos = e.pos;
 		
-		System.out.println("Sapling Event!");
+		//great oak grows on the northwest corner
+		if(((BlockSapling)Blocks.sapling).isTypeAt(e.world, e.pos, BlockPlanks.EnumType.OAK)){
+			//Sapling is in southwest corner
+			if(((BlockSapling)Blocks.sapling).isTypeAt(e.world, e.pos.north(), BlockPlanks.EnumType.OAK) &&
+					((BlockSapling)Blocks.sapling).isTypeAt(e.world, e.pos.east(), BlockPlanks.EnumType.OAK) &&
+					((BlockSapling)Blocks.sapling).isTypeAt(e.world, e.pos.north().east(), BlockPlanks.EnumType.OAK)){
+				flagSquare = true;
+				treeGrowPos = treeGrowPos.north();
+			}
+			//Sapling is in southeast corner
+			if(((BlockSapling)Blocks.sapling).isTypeAt(e.world, e.pos.north(), BlockPlanks.EnumType.OAK) &&
+					((BlockSapling)Blocks.sapling).isTypeAt(e.world, e.pos.west(), BlockPlanks.EnumType.OAK) &&
+					((BlockSapling)Blocks.sapling).isTypeAt(e.world, e.pos.north().west(), BlockPlanks.EnumType.OAK)){
+				flagSquare = true;
+				treeGrowPos = treeGrowPos.west().north();
+			}
+			//Sapling is in northwest corner
+			if(((BlockSapling)Blocks.sapling).isTypeAt(e.world, e.pos.south(), BlockPlanks.EnumType.OAK) &&
+					((BlockSapling)Blocks.sapling).isTypeAt(e.world, e.pos.east(), BlockPlanks.EnumType.OAK) &&
+					((BlockSapling)Blocks.sapling).isTypeAt(e.world, e.pos.south().east(), BlockPlanks.EnumType.OAK)){
+				flagSquare = true;
+				//treeGrowPos is good
+			}
+			//Sapling is in northeast corner
+			if(((BlockSapling)Blocks.sapling).isTypeAt(e.world, e.pos.south(), BlockPlanks.EnumType.OAK) &&
+					((BlockSapling)Blocks.sapling).isTypeAt(e.world, e.pos.west(), BlockPlanks.EnumType.OAK) &&
+					((BlockSapling)Blocks.sapling).isTypeAt(e.world, e.pos.south().west(), BlockPlanks.EnumType.OAK)){
+				flagSquare = true;
+				treeGrowPos = treeGrowPos.west();
+			}
+			
+			if(flagSquare){
+				e.setResult(Event.Result.DENY);
+				HighlandsGenerators.greatOakSapling.generate(e.world, e.rand, treeGrowPos);
+			}
+			
+		}
 	}
-	*/
+	
 	
 }
 

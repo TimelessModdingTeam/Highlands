@@ -1,5 +1,5 @@
 {
-    "parent": "highlands:block/palm_leaves",
+    "parent": "highlands:block/bamboo_planks",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

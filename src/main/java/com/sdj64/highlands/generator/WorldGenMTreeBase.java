@@ -2,6 +2,9 @@ package com.sdj64.highlands.generator;
 
 import java.util.Random;
 
+import com.sdj64.highlands.block.BlockHighlandsLeaves;
+import com.sdj64.highlands.block.BlockHighlandsSapling;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
@@ -211,7 +214,7 @@ public abstract class WorldGenMTreeBase extends WorldGenAbstractTree
     protected void setBlockLeaf(BlockPos pos){
     	try{
 			if(world.isAirBlock(pos) || world.getBlockState(pos).getBlock().equals(Blocks.tallgrass)){
-				world.setBlockState(pos, leaves.getStateFromMeta(leafMeta));
+				world.setBlockState(pos, leaves.getStateFromMeta(leafMeta));//getDefaultState().withProperty(BlockHighlandsLeaves.CHECK_DECAY, true).withProperty(BlockHighlandsLeaves.DECAYABLE, true));
 			}
     	}
     	catch(RuntimeException e){
@@ -228,7 +231,9 @@ public abstract class WorldGenMTreeBase extends WorldGenAbstractTree
      */
     protected void setBlockLog(BlockPos pos, int direction){
     	try{
-			if(world.getBlockState(pos).getBlock().isReplaceable(world, pos) || world.isAirBlock(pos)){
+			if(world.getBlockState(pos).getBlock().isReplaceable(world, pos) ||
+					world.isAirBlock(pos) ||
+					world.getBlockState(pos).getBlock() instanceof BlockHighlandsSapling){
 				world.setBlockState(pos, wood.getStateFromMeta(woodMeta+direction));
 			}
     	}
