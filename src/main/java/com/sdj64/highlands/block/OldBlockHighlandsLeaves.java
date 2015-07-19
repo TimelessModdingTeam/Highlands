@@ -1,7 +1,5 @@
 package com.sdj64.highlands.block;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.block.material.Material;
@@ -20,6 +18,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 public abstract class OldBlockHighlandsLeaves extends BlockLeavesBase implements net.minecraftforge.common.IShearable
 {
@@ -92,7 +92,7 @@ public abstract class OldBlockHighlandsLeaves extends BlockLeavesBase implements
     {
         if (!worldIn.isRemote)
         {
-            if (((Boolean)state.getValue(CHECK_DECAY)).booleanValue() && ((Boolean)state.getValue(DECAYABLE)).booleanValue())
+            if (((Boolean) state.getValue(CHECK_DECAY)).booleanValue() && ((Boolean) state.getValue(DECAYABLE)).booleanValue())
             {
                 byte b0 = 4;
                 int i = b0 + 1;
@@ -208,9 +208,9 @@ public abstract class OldBlockHighlandsLeaves extends BlockLeavesBase implements
     {
         if (worldIn.canLightningStrike(pos.up()) && !World.doesBlockHaveSolidTopSurface(worldIn, pos.down()) && rand.nextInt(15) == 1)
         {
-            double d0 = (double)((float)pos.getX() + rand.nextFloat());
-            double d1 = (double)pos.getY() - 0.05D;
-            double d2 = (double)((float)pos.getZ() + rand.nextFloat());
+            double d0 = (double) ((float) pos.getX() + rand.nextFloat());
+            double d1 = (double) pos.getY() - 0.05D;
+            double d2 = (double) ((float) pos.getZ() + rand.nextFloat());
             worldIn.spawnParticle(EnumParticleTypes.DRIP_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D, new int[0]);
         }
     }
@@ -231,7 +231,7 @@ public abstract class OldBlockHighlandsLeaves extends BlockLeavesBase implements
 
     /**
      * Get the Item that this Block should drop when harvested.
-     *  
+     *
      * @param fortune the level of the Fortune enchantment on the player's tool
      */
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
@@ -241,8 +241,8 @@ public abstract class OldBlockHighlandsLeaves extends BlockLeavesBase implements
 
     /**
      * Spawns this Block's drops into the World as EntityItems.
-     *  
-     * @param chance The chance that each Item is actually spawned (1.0 = always, 0.0 = never)
+     *
+     * @param chance  The chance that each Item is actually spawned (1.0 = always, 0.0 = never)
      * @param fortune The player's fortune level
      */
     public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
@@ -250,7 +250,9 @@ public abstract class OldBlockHighlandsLeaves extends BlockLeavesBase implements
         super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
     }
 
-    protected void dropApple(World worldIn, BlockPos pos, IBlockState state, int chance) {}
+    protected void dropApple(World worldIn, BlockPos pos, IBlockState state, int chance)
+    {
+    }
 
     protected int getSaplingDropChance(IBlockState state)
     {
@@ -286,14 +288,23 @@ public abstract class OldBlockHighlandsLeaves extends BlockLeavesBase implements
 
     public abstract OldBlockHighlandsPlanks.EnumType getWoodType(int meta);
 
-    @Override public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos){ return true; }
-    @Override public boolean isLeaves(IBlockAccess world, BlockPos pos){ return true; }
+    @Override
+    public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos)
+    {
+        return true;
+    }
+
+    @Override
+    public boolean isLeaves(IBlockAccess world, BlockPos pos)
+    {
+        return true;
+    }
 
     @Override
     public void beginLeavesDecay(World world, BlockPos pos)
     {
         IBlockState state = world.getBlockState(pos);
-        if (!(Boolean)state.getValue(CHECK_DECAY))
+        if (!(Boolean) state.getValue(CHECK_DECAY))
         {
             world.setBlockState(pos, state.withProperty(CHECK_DECAY, true), 4);
         }
@@ -303,7 +314,7 @@ public abstract class OldBlockHighlandsLeaves extends BlockLeavesBase implements
     public java.util.List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
     {
         java.util.List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
-        Random rand = world instanceof World ? ((World)world).rand : new Random();
+        Random rand = world instanceof World ? ((World) world).rand : new Random();
         int chance = this.getSaplingDropChance(state);
 
         if (fortune > 0)
@@ -324,7 +335,7 @@ public abstract class OldBlockHighlandsLeaves extends BlockLeavesBase implements
 
         this.captureDrops(true);
         if (world instanceof World)
-            this.dropApple((World)world, pos, state, chance); // Dammet mojang
+            this.dropApple((World) world, pos, state, chance); // Dammet mojang
         ret.addAll(this.captureDrops(false));
         return ret;
     }

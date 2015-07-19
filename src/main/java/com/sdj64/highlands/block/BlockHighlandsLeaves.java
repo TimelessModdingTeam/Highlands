@@ -1,20 +1,15 @@
 package com.sdj64.highlands.block;
 
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -29,73 +24,75 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.google.common.base.Predicate;
+import java.util.List;
+import java.util.Random;
 
 public class BlockHighlandsLeaves extends BlockLeaves
 {
-	private HighlandsBlocks.EnumType treeType;
+    private HighlandsBlocks.EnumType treeType;
 
     public BlockHighlandsLeaves(HighlandsBlocks.EnumType type, String name)
     {
-    	treeType = type;
-    	setUnlocalizedName(name + "_leaves");
+        treeType = type;
+        setUnlocalizedName(name + "_leaves");
         this.setHardness(0.2F);
         this.setLightOpacity(1);
         this.setStepSound(soundTypeGrass);
         this.setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
         this.setCreativeTab(HighlandsBlocks.tabHighlands);
-        
-        
-        
+
+
         this.setGraphics();
     }
-    
-    public void setGraphics(){
-    	if(FMLCommonHandler.instance().getEffectiveSide().equals(Side.CLIENT))
-    		this.setGraphicsLevel(Minecraft.getMinecraft().isFancyGraphicsEnabled());
+
+    public void setGraphics()
+    {
+        if (FMLCommonHandler.instance().getEffectiveSide().equals(Side.CLIENT))
+            this.setGraphicsLevel(Minecraft.getMinecraft().isFancyGraphicsEnabled());
     }
-    
+
     @SideOnly(Side.CLIENT)
     public int getBlockColor()
     {
-        return this.treeType==HighlandsBlocks.EnumType.ASPEN ? 0xFFFFFF: ColorizerFoliage.getFoliageColor(0.5D, 1.0D);
+        return this.treeType == HighlandsBlocks.EnumType.ASPEN ? 0xFFFFFF : ColorizerFoliage.getFoliageColor(0.5D, 1.0D);
     }
 
     @SideOnly(Side.CLIENT)
     public int getRenderColor(IBlockState state)
     {
-        return this.treeType==HighlandsBlocks.EnumType.ASPEN ? 0xFFFFFF: ColorizerFoliage.getFoliageColorBasic();
+        return this.treeType == HighlandsBlocks.EnumType.ASPEN ? 0xFFFFFF : ColorizerFoliage.getFoliageColorBasic();
     }
 
     @SideOnly(Side.CLIENT)
     public int colorMultiplier(IBlockAccess worldIn, BlockPos pos, int renderPass)
     {
-        return this.treeType==HighlandsBlocks.EnumType.ASPEN ? 0xFFFFFF: BiomeColorHelper.getFoliageColorAtPos(worldIn, pos);
+        return this.treeType == HighlandsBlocks.EnumType.ASPEN ? 0xFFFFFF : BiomeColorHelper.getFoliageColorAtPos(worldIn, pos);
     }
-    
+
     public HighlandsBlocks.EnumType getTreeType()
     {
-    	return treeType;
+        return treeType;
     }
 
     protected void dropApple(World worldIn, BlockPos pos, IBlockState state, int chance)
     {
-    	//does nothing, since Highlands trees don't drop apples.
+        //does nothing, since Highlands trees don't drop apples.
     }
 
     protected int getSaplingDropChance(IBlockState state)
     {
-        return treeType.equals(HighlandsBlocks.EnumType.REDWOOD) ? 80 : 
-        	treeType.equals(HighlandsBlocks.EnumType.BAMBOO) ? 5 : 
-        		super.getSaplingDropChance(state);
+        return treeType.equals(HighlandsBlocks.EnumType.REDWOOD) ? 80 :
+                treeType.equals(HighlandsBlocks.EnumType.BAMBOO) ? 5 :
+                        super.getSaplingDropChance(state);
     }
-    
+
     /**
      * Copied from BlockLeaves, without the part about dropping apples.
      */
-    public java.util.List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune){
-    	java.util.List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
-        Random rand = world instanceof World ? ((World)world).rand : new Random();
+    public java.util.List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+    {
+        java.util.List<ItemStack> ret = new java.util.ArrayList<ItemStack>();
+        Random rand = world instanceof World ? ((World) world).rand : new Random();
         int chance = this.getSaplingDropChance(state);
 
         if (fortune > 0)
@@ -118,7 +115,7 @@ public class BlockHighlandsLeaves extends BlockLeaves
         ret.addAll(this.captureDrops(false));
         return ret;
     }
-    
+
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
         return Item.getItemFromBlock(HighlandsBlocks.saplings[treeType.getMetadata()]);
@@ -138,8 +135,8 @@ public class BlockHighlandsLeaves extends BlockLeaves
      */
     public IBlockState getStateFromMeta(int meta)
     {
-    	boolean dec = meta < 4;
-    	boolean check = meta < 8;
+        boolean dec = meta < 4;
+        boolean check = meta < 8;
         return this.getDefaultState().withProperty(DECAYABLE, dec).withProperty(CHECK_DECAY, check);
     }
 
@@ -150,12 +147,12 @@ public class BlockHighlandsLeaves extends BlockLeaves
     {
         int i = 0;
 
-        if (!((Boolean)state.getValue(DECAYABLE)).booleanValue())
+        if (!((Boolean) state.getValue(DECAYABLE)).booleanValue())
         {
             i = 4;
         }
 
-        if (!((Boolean)state.getValue(CHECK_DECAY)).booleanValue())
+        if (!((Boolean) state.getValue(CHECK_DECAY)).booleanValue())
         {
             i = 8;
         }
@@ -165,7 +162,7 @@ public class BlockHighlandsLeaves extends BlockLeaves
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {CHECK_DECAY, DECAYABLE});
+        return new BlockState(this, new IProperty[]{CHECK_DECAY, DECAYABLE});
     }
 
     /**
@@ -196,12 +193,12 @@ public class BlockHighlandsLeaves extends BlockLeaves
         return new java.util.ArrayList(java.util.Arrays.asList(new ItemStack(this, 1, 0)));
     }
 
-	@Override
-	public EnumType getWoodType(int meta) {
-		// returns Birch since it doesn't drop any apples. Probably safe, and safer than null.
-		return BlockPlanks.EnumType.BIRCH;
-	}
-	
-	
-	
+    @Override
+    public EnumType getWoodType(int meta)
+    {
+        // returns Birch since it doesn't drop any apples. Probably safe, and safer than null.
+        return BlockPlanks.EnumType.BIRCH;
+    }
+
+
 }

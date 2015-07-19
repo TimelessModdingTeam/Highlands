@@ -1,32 +1,25 @@
 package com.sdj64.highlands.biome;
 
-import java.util.Random;
-
-import com.sdj64.highlands.HighlandsMod;
 import com.sdj64.highlands.generator.HighlandsGenerators;
-
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.BiomeDecorator;
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenTaiga2;
-import net.minecraft.world.gen.feature.WorldGenTallGrass;
-import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 public class BiomeGenPinelands extends BiomeGenBaseHighlands
 {
 
-	public BiomeGenPinelands(int par1)
+    public BiomeGenPinelands(int par1)
     {
         super(par1);
-        
+
         theBiomeDecorator.treesPerChunk = 3;
         theBiomeDecorator.grassPerChunk = 6;
         theBiomeDecorator.flowersPerChunk = 0;
-	    
+
         maxHeight = 0.8F;
         minHeight = 0.3F;
         temperature = 0.5F;
@@ -40,13 +33,13 @@ public class BiomeGenPinelands extends BiomeGenBaseHighlands
     {
         return (par1Random.nextInt(2) == 0 ? HighlandsGenerators.shrubGen : new WorldGenTaiga2(false));
     }
-    
+
     public void decorate(World world, Random random, BlockPos pos)
     {
         super.decorate(world, random, pos);
-        
-        genStandardOre(theBiomeDecorator.chunkProviderSettings.ironCount/2, theBiomeDecorator.ironGen, theBiomeDecorator.chunkProviderSettings.ironMinHeight, theBiomeDecorator.chunkProviderSettings.ironMaxHeight, world, random, pos);
-        
+
+        genStandardOre(theBiomeDecorator.chunkProviderSettings.ironCount / 2, theBiomeDecorator.ironGen, theBiomeDecorator.chunkProviderSettings.ironMinHeight, theBiomeDecorator.chunkProviderSettings.ironMaxHeight, world, random, pos);
+
         int i = 3 + random.nextInt(6);
         int j;
         int k;

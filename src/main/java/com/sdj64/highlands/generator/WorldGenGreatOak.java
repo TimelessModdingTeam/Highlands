@@ -1,9 +1,6 @@
 package com.sdj64.highlands.generator;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-
+import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.init.Blocks;
@@ -12,7 +9,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
-import com.google.common.collect.Lists;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
 public class WorldGenGreatOak extends WorldGenAbstractTree
 {
@@ -27,7 +26,9 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
     double leafDensity;
     int trunkWide;
     int heightLimit2;
-    /** Sets the distance limit for how far away the generator will populate leaves from the base leaf node. */
+    /**
+     * Sets the distance limit for how far away the generator will populate leaves from the base leaf node.
+     */
     int leafDistanceLimit;
     List<FoliageCoordinates> field_175948_j;
     Block leafBlock;
@@ -36,7 +37,7 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
     int woodMeta;
 
     public WorldGenGreatOak(Block leafBlk, Block woodBlk, int leafBlockMeta,
-			int woodBlockMeta, int trunkWidth, int maxH, boolean notify)
+                            int woodBlockMeta, int trunkWidth, int maxH, boolean notify)
     {
         super(notify);
         this.blockPosOrigin = BlockPos.ORIGIN;
@@ -48,7 +49,7 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
         this.heightLimit2 = maxH;
         this.heightLimit = maxH;
         this.leafDistanceLimit = 4;
-        
+
         this.leafBlock = leafBlk;
         this.leafMeta = leafBlockMeta;
         this.woodBlock = woodBlk;
@@ -60,14 +61,14 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
      */
     void generateLeafNodeList()
     {
-        this.height = (int)((double)this.heightLimit * this.heightAttenuation);
+        this.height = (int) ((double) this.heightLimit * this.heightAttenuation);
 
         if (this.height >= this.heightLimit)
         {
             this.height = this.heightLimit - 1;
         }
 
-        int i = (int)(1.382D + Math.pow(this.leafDensity * (double)this.heightLimit / 13.0D, 2.0D));
+        int i = (int) (1.382D + Math.pow(this.leafDensity * (double) this.heightLimit / 13.0D, 2.0D));
 
         if (i < 1)
         {
@@ -87,19 +88,19 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
             {
                 for (int l = 0; l < i; ++l)
                 {
-                    double d0 = this.field_175945_e * (double)f * ((double)this.field_175949_k.nextFloat() + 0.328D);
-                    double d1 = (double)(this.field_175949_k.nextFloat() * 2.0F) * Math.PI;
+                    double d0 = this.field_175945_e * (double) f * ((double) this.field_175949_k.nextFloat() + 0.328D);
+                    double d1 = (double) (this.field_175949_k.nextFloat() * 2.0F) * Math.PI;
                     double d2 = d0 * Math.sin(d1) + 0.5D;
                     double d3 = d0 * Math.cos(d1) + 0.5D;
-                    BlockPos blockpos = this.blockPosOrigin.add(d2, (double)(k - 1), d3);
+                    BlockPos blockpos = this.blockPosOrigin.add(d2, (double) (k - 1), d3);
                     BlockPos blockpos1 = blockpos.up(this.leafDistanceLimit);
 
                     if (this.func_175936_a(blockpos, blockpos1) == -1)
                     {
                         int i1 = this.blockPosOrigin.getX() - blockpos.getX();
                         int j1 = this.blockPosOrigin.getZ() - blockpos.getZ();
-                        double d4 = (double)blockpos.getY() - Math.sqrt((double)(i1 * i1 + j1 * j1)) * this.field_175944_d;
-                        int k1 = d4 > (double)j ? j : (int)d4;
+                        double d4 = (double) blockpos.getY() - Math.sqrt((double) (i1 * i1 + j1 * j1)) * this.field_175944_d;
+                        int k1 = d4 > (double) j ? j : (int) d4;
                         BlockPos blockpos2 = new BlockPos(this.blockPosOrigin.getX(), k1, this.blockPosOrigin.getZ());
 
                         if (this.func_175936_a(blockpos2, blockpos) == -1)
@@ -114,13 +115,13 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
 
     void somethingAboutGeneratingLeaves(BlockPos pos, float p_180712_2_)
     {
-        int i = (int)((double)p_180712_2_ + 0.618D);
+        int i = (int) ((double) p_180712_2_ + 0.618D);
 
         for (int j = -i; j <= i; ++j)
         {
             for (int k = -i; k <= i; ++k)
             {
-                if (Math.pow((double)Math.abs(j) + 0.5D, 2.0D) + Math.pow((double)Math.abs(k) + 0.5D, 2.0D) <= (double)(p_180712_2_ * p_180712_2_))
+                if (Math.pow((double) Math.abs(j) + 0.5D, 2.0D) + Math.pow((double) Math.abs(k) + 0.5D, 2.0D) <= (double) (p_180712_2_ * p_180712_2_))
                 {
                     BlockPos blockpos1 = pos.add(j, 0, k);
                     net.minecraft.block.state.IBlockState state = this.world.getBlockState(blockpos1);
@@ -139,14 +140,14 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
      */
     float layerSize(int p_76490_1_)
     {
-        if ((float)p_76490_1_ < (float)this.heightLimit * 0.3F)
+        if ((float) p_76490_1_ < (float) this.heightLimit * 0.3F)
         {
             return -1.0F;
         }
         else
         {
-            float f = (float)this.heightLimit / 2.0F;
-            float f1 = f - (float)p_76490_1_;
+            float f = (float) this.heightLimit / 2.0F;
+            float f1 = f - (float) p_76490_1_;
             float f2 = MathHelper.sqrt_float(f * f - f1 * f1);
 
             if (f1 == 0.0F)
@@ -179,13 +180,13 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
     {
         BlockPos blockpos2 = p_175937_2_.add(-p_175937_1_.getX(), -p_175937_1_.getY(), -p_175937_1_.getZ());
         int i = this.func_175935_b(blockpos2);
-        float f = (float)blockpos2.getX() / (float)i;
-        float f1 = (float)blockpos2.getY() / (float)i;
-        float f2 = (float)blockpos2.getZ() / (float)i;
+        float f = (float) blockpos2.getX() / (float) i;
+        float f1 = (float) blockpos2.getY() / (float) i;
+        float f2 = (float) blockpos2.getZ() / (float) i;
 
         for (int j = 0; j <= i; ++j)
         {
-            BlockPos blockpos3 = p_175937_1_.add((double)(0.5F + (float)j * f), (double)(0.5F + (float)j * f1), (double)(0.5F + (float)j * f2));
+            BlockPos blockpos3 = p_175937_1_.add((double) (0.5F + (float) j * f), (double) (0.5F + (float) j * f1), (double) (0.5F + (float) j * f2));
             BlockLog.EnumAxis enumaxis = this.func_175938_b(p_175937_1_, blockpos3);
             this.func_175903_a(this.world, blockpos3, woodBlock.getStateFromMeta(woodMeta).withProperty(BlockLog.LOG_AXIS, enumaxis));
         }
@@ -227,7 +228,7 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
 
         while (iterator.hasNext())
         {
-            WorldGenGreatOak.FoliageCoordinates foliagecoordinates = (WorldGenGreatOak.FoliageCoordinates)iterator.next();
+            WorldGenGreatOak.FoliageCoordinates foliagecoordinates = (WorldGenGreatOak.FoliageCoordinates) iterator.next();
             this.func_175940_a(foliagecoordinates);
         }
     }
@@ -237,7 +238,7 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
      */
     boolean leafNodeNeedsBase(int p_76493_1_)
     {
-        return (double)p_76493_1_ >= (double)this.heightLimit * 0.2D;
+        return (double) p_76493_1_ >= (double) this.heightLimit * 0.2D;
     }
 
     void func_175942_c()
@@ -260,7 +261,7 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
 
         while (iterator.hasNext())
         {
-            WorldGenGreatOak.FoliageCoordinates foliagecoordinates = (WorldGenGreatOak.FoliageCoordinates)iterator.next();
+            WorldGenGreatOak.FoliageCoordinates foliagecoordinates = (WorldGenGreatOak.FoliageCoordinates) iterator.next();
             int i = foliagecoordinates.func_177999_q();
             BlockPos blockpos = new BlockPos(this.blockPosOrigin.getX(), i, this.blockPosOrigin.getZ());
 
@@ -275,9 +276,9 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
     {
         BlockPos blockpos2 = p_175936_2_.add(-p_175936_1_.getX(), -p_175936_1_.getY(), -p_175936_1_.getZ());
         int i = this.func_175935_b(blockpos2);
-        float f = (float)blockpos2.getX() / (float)i;
-        float f1 = (float)blockpos2.getY() / (float)i;
-        float f2 = (float)blockpos2.getZ() / (float)i;
+        float f = (float) blockpos2.getX() / (float) i;
+        float f1 = (float) blockpos2.getY() / (float) i;
+        float f2 = (float) blockpos2.getZ() / (float) i;
 
         if (i == 0)
         {
@@ -287,7 +288,7 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
         {
             for (int j = 0; j <= i; ++j)
             {
-                BlockPos blockpos3 = p_175936_1_.add((double)(0.5F + (float)j * f), (double)(0.5F + (float)j * f1), (double)(0.5F + (float)j * f2));
+                BlockPos blockpos3 = p_175936_1_.add((double) (0.5F + (float) j * f), (double) (0.5F + (float) j * f1), (double) (0.5F + (float) j * f2));
 
                 if (!this.isReplaceable(world, blockpos3))
                 {
@@ -322,17 +323,19 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
         }
         else
         {
-        	try{
-	            this.generateLeafNodeList();
-	            this.func_175941_b();
-	            this.func_175942_c();
-	            this.func_175939_d();
-	            this.world = null; //Fix vanilla Mem leak, holds latest world
-	            return true;
-        	}
-        	catch(Exception e){
-        		return false;
-        	}
+            try
+            {
+                this.generateLeafNodeList();
+                this.func_175941_b();
+                this.func_175942_c();
+                this.func_175939_d();
+                this.world = null; //Fix vanilla Mem leak, holds latest world
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
     }
 
@@ -344,7 +347,7 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
     {
         BlockPos down = this.blockPosOrigin.down();
         net.minecraft.block.state.IBlockState state = this.world.getBlockState(down);
-        boolean isSoil = state.getBlock().canSustainPlant(this.world, down, net.minecraft.util.EnumFacing.UP, ((net.minecraft.block.BlockSapling)Blocks.sapling));
+        boolean isSoil = state.getBlock().canSustainPlant(this.world, down, net.minecraft.util.EnumFacing.UP, ((net.minecraft.block.BlockSapling) Blocks.sapling));
 
         if (!isSoil)
         {
@@ -371,18 +374,18 @@ public class WorldGenGreatOak extends WorldGenAbstractTree
     }
 
     static class FoliageCoordinates extends BlockPos
+    {
+        private final int field_178000_b;
+
+        public FoliageCoordinates(BlockPos p_i45635_1_, int p_i45635_2_)
         {
-            private final int field_178000_b;
-
-            public FoliageCoordinates(BlockPos p_i45635_1_, int p_i45635_2_)
-            {
-                super(p_i45635_1_.getX(), p_i45635_1_.getY(), p_i45635_1_.getZ());
-                this.field_178000_b = p_i45635_2_;
-            }
-
-            public int func_177999_q()
-            {
-                return this.field_178000_b;
-            }
+            super(p_i45635_1_.getX(), p_i45635_1_.getY(), p_i45635_1_.getZ());
+            this.field_178000_b = p_i45635_2_;
         }
+
+        public int func_177999_q()
+        {
+            return this.field_178000_b;
+        }
+    }
 }

@@ -1,13 +1,13 @@
 package com.sdj64.highlands.generator.layer;
 
-import net.minecraft.world.gen.layer.*;
-import net.minecraft.world.biome.BiomeGenBase;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.sdj64.highlands.biome.BiomeGenBaseHighlands;
 import com.sdj64.highlands.biome.HighlandsBiomes;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.gen.layer.GenLayer;
+import net.minecraft.world.gen.layer.GenLayerHills;
+import net.minecraft.world.gen.layer.IntCache;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class GenLayerHillsHighlands extends GenLayerHills
 {
@@ -36,7 +36,7 @@ public class GenLayerHillsHighlands extends GenLayerHills
         {
             for (int j1 = 0; j1 < areaWidth; ++j1)
             {
-                this.initChunkSeed((long)(j1 + areaX), (long)(i1 + areaY));
+                this.initChunkSeed((long) (j1 + areaX), (long) (i1 + areaY));
                 int k1 = aint[j1 + 1 + (i1 + 1) * (areaWidth + 2)];
                 int l1 = aint1[j1 + 1 + (i1 + 1) * (areaWidth + 2)];
                 boolean flag = (l1 - 2) % 29 == 0;
@@ -72,12 +72,12 @@ public class GenLayerHillsHighlands extends GenLayerHills
                     }
                     else if (k1 == BiomeGenBase.forest.biomeID)
                     {
-                    	//Highlands code for bald hill as a sub of forest
-                    	j2 = this.nextInt(2);
+                        //Highlands code for bald hill as a sub of forest
+                        j2 = this.nextInt(2);
 
                         if (j2 == 0)
                         {
-                        	i2 = BiomeGenBase.forestHills.biomeID;
+                            i2 = BiomeGenBase.forestHills.biomeID;
                         }
                         else
                         {
@@ -155,11 +155,12 @@ public class GenLayerHillsHighlands extends GenLayerHills
                     //Highlands code for any Highlands biome with subs
                     else if (BiomeGenBase.getBiomeGenArray()[k1] instanceof BiomeGenBaseHighlands)
                     {
-                    	BiomeGenBaseHighlands hlBiome = (BiomeGenBaseHighlands) BiomeGenBase.getBiomeGenArray()[k1];
-                    	if(hlBiome.subBiomes.size() > 0){
-	                    	j2 = this.nextInt(hlBiome.subBiomes.size());
-	                    	i2 = hlBiome.subBiomes.get(j2).biomeID;
-                    	}
+                        BiomeGenBaseHighlands hlBiome = (BiomeGenBaseHighlands) BiomeGenBase.getBiomeGenArray()[k1];
+                        if (hlBiome.subBiomes.size() > 0)
+                        {
+                            j2 = this.nextInt(hlBiome.subBiomes.size());
+                            i2 = hlBiome.subBiomes.get(j2).biomeID;
+                        }
                     }
 
                     if (flag && i2 != k1)

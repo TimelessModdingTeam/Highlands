@@ -1,7 +1,6 @@
 package com.sdj64.highlands.block;
 
-import java.util.List;
-
+import com.google.common.base.Predicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -20,20 +19,22 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.google.common.base.Predicate;
+import java.util.List;
 
 public class OldBlockHighlandsLeaves1 extends OldBlockHighlandsLeaves
 {
     public static final PropertyEnum VARIANT = PropertyEnum.create("variant", OldBlockHighlandsPlanks.EnumType.class, new Predicate()
     {
         private static final String __OBFID = "CL_00002085";
+
         public boolean apply(OldBlockHighlandsPlanks.EnumType type)
         {
             return type.getMetadata() < 4;
         }
+
         public boolean apply(Object p_apply_1_)
         {
-            return this.apply((OldBlockHighlandsPlanks.EnumType)p_apply_1_);
+            return this.apply((OldBlockHighlandsPlanks.EnumType) p_apply_1_);
         }
     });
 
@@ -51,7 +52,7 @@ public class OldBlockHighlandsLeaves1 extends OldBlockHighlandsLeaves
         }
         else
         {
-            OldBlockHighlandsPlanks.EnumType enumtype = (OldBlockHighlandsPlanks.EnumType)state.getValue(VARIANT);
+            OldBlockHighlandsPlanks.EnumType enumtype = (OldBlockHighlandsPlanks.EnumType) state.getValue(VARIANT);
             return super.getRenderColor(state);
         }
     }
@@ -64,7 +65,7 @@ public class OldBlockHighlandsLeaves1 extends OldBlockHighlandsLeaves
 
     protected void dropApple(World worldIn, BlockPos pos, IBlockState state, int chance)
     {
-    	//does nothing, since Highlands trees don't drop apples.
+        //does nothing, since Highlands trees don't drop apples.
     }
 
     protected int getSaplingDropChance(IBlockState state)
@@ -86,7 +87,7 @@ public class OldBlockHighlandsLeaves1 extends OldBlockHighlandsLeaves
 
     protected ItemStack createStackedBlock(IBlockState state)
     {
-        return new ItemStack(Item.getItemFromBlock(this), 1, ((OldBlockHighlandsPlanks.EnumType)state.getValue(VARIANT)).getMetadata());
+        return new ItemStack(Item.getItemFromBlock(this), 1, ((OldBlockHighlandsPlanks.EnumType) state.getValue(VARIANT)).getMetadata());
     }
 
     /**
@@ -103,14 +104,14 @@ public class OldBlockHighlandsLeaves1 extends OldBlockHighlandsLeaves
     public int getMetaFromState(IBlockState state)
     {
         byte b0 = 0;
-        int i = b0 | ((OldBlockHighlandsPlanks.EnumType)state.getValue(VARIANT)).getMetadata();
+        int i = b0 | ((OldBlockHighlandsPlanks.EnumType) state.getValue(VARIANT)).getMetadata();
 
-        if (!((Boolean)state.getValue(DECAYABLE)).booleanValue())
+        if (!((Boolean) state.getValue(DECAYABLE)).booleanValue())
         {
             i |= 4;
         }
 
-        if (((Boolean)state.getValue(CHECK_DECAY)).booleanValue())
+        if (((Boolean) state.getValue(CHECK_DECAY)).booleanValue())
         {
             i |= 8;
         }
@@ -125,7 +126,7 @@ public class OldBlockHighlandsLeaves1 extends OldBlockHighlandsLeaves
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {VARIANT, CHECK_DECAY, DECAYABLE});
+        return new BlockState(this, new IProperty[]{VARIANT, CHECK_DECAY, DECAYABLE});
     }
 
     /**
@@ -133,7 +134,7 @@ public class OldBlockHighlandsLeaves1 extends OldBlockHighlandsLeaves
      */
     public int damageDropped(IBlockState state)
     {
-        return ((OldBlockHighlandsPlanks.EnumType)state.getValue(VARIANT)).getMetadata();
+        return ((OldBlockHighlandsPlanks.EnumType) state.getValue(VARIANT)).getMetadata();
     }
 
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te)
@@ -141,7 +142,7 @@ public class OldBlockHighlandsLeaves1 extends OldBlockHighlandsLeaves
         if (!worldIn.isRemote && player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == Items.shears)
         {
             player.triggerAchievement(StatList.mineBlockStatArray[Block.getIdFromBlock(this)]);
-            spawnAsEntity(worldIn, pos, new ItemStack(Item.getItemFromBlock(this), 1, ((OldBlockHighlandsPlanks.EnumType)state.getValue(VARIANT)).getMetadata()));
+            spawnAsEntity(worldIn, pos, new ItemStack(Item.getItemFromBlock(this), 1, ((OldBlockHighlandsPlanks.EnumType) state.getValue(VARIANT)).getMetadata()));
         }
         else
         {
@@ -153,6 +154,6 @@ public class OldBlockHighlandsLeaves1 extends OldBlockHighlandsLeaves
     public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune)
     {
         IBlockState state = world.getBlockState(pos);
-        return new java.util.ArrayList(java.util.Arrays.asList(new ItemStack(this, 1, ((OldBlockHighlandsPlanks.EnumType)state.getValue(VARIANT)).getMetadata())));
+        return new java.util.ArrayList(java.util.Arrays.asList(new ItemStack(this, 1, ((OldBlockHighlandsPlanks.EnumType) state.getValue(VARIANT)).getMetadata())));
     }
 }

@@ -1,5 +1,6 @@
 package com.sdj64.highlands.block;
 
-public class OldBlockHighlandsWood {
+public class OldBlockHighlandsWood
+{
 
 }

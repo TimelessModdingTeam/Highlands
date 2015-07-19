@@ -1,21 +1,5 @@
 package com.sdj64.highlands.biome;
 
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE;
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.MINESHAFT;
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.OCEAN_MONUMENT;
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.RAVINE;
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.SCATTERED_FEATURE;
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.STRONGHOLD;
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.VILLAGE;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.DUNGEON;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ICE;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE;
-import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAVA;
-
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
@@ -31,72 +15,77 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.ChunkProviderGenerate;
-import net.minecraft.world.gen.ChunkProviderSettings;
-import net.minecraft.world.gen.MapGenBase;
-import net.minecraft.world.gen.MapGenCaves;
-import net.minecraft.world.gen.MapGenRavine;
-import net.minecraft.world.gen.NoiseGenerator;
-import net.minecraft.world.gen.NoiseGeneratorOctaves;
-import net.minecraft.world.gen.NoiseGeneratorPerlin;
+import net.minecraft.world.gen.*;
 import net.minecraft.world.gen.feature.WorldGenDungeons;
 import net.minecraft.world.gen.feature.WorldGenLakes;
-import net.minecraft.world.gen.structure.MapGenMineshaft;
-import net.minecraft.world.gen.structure.MapGenScatteredFeature;
-import net.minecraft.world.gen.structure.MapGenStronghold;
-import net.minecraft.world.gen.structure.MapGenVillage;
-import net.minecraft.world.gen.structure.StructureOceanMonument;
+import net.minecraft.world.gen.structure.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 
+import java.util.List;
+import java.util.Random;
+
+import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.*;
+import static net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.*;
+
 
 /**
  * Class that overwrites ChunkProviderGenerate in the Highlands world type.  I had to copy everything
  * because it's all private (most importantly the settings field)
- *
  */
-public class ChunkProviderHighlands implements IChunkProvider{
+public class ChunkProviderHighlands implements IChunkProvider
+{
 
-	//Highlands method - modifies horizontal noise to smooth the world out
-	private void ModifySettingsForHighlands(){
-		ChunkProviderSettings.Factory fact = new ChunkProviderSettings.Factory();
-		//fact.coordinateScale *= 5;
-		//fact.heightScale /= 2;
-		//fact.mainNoiseScaleX *= 10;
-		//fact.mainNoiseScaleZ *= 10;
-		//fact.stretchY *= 6;
-		//fact.seaLevel = 64;
-		//fact.depthNoiseScaleX /= 10;
-		//fact.depthNoiseScaleZ /= 10;
-		fact.useLavaLakes = false;
-		fact.useWaterLakes = false;
-		fact.riverSize += 3;
-		//fact.lowerLimitScale *= 2;
-		//fact.upperLimitScale *= 2;
-		//fact.biomeScaleWeight /= 1.5;
-		
-		this.settings = fact.func_177864_b();
-	}
-	
-	
-	
-    /** RNG. */
+    //Highlands method - modifies horizontal noise to smooth the world out
+    private void ModifySettingsForHighlands()
+    {
+        ChunkProviderSettings.Factory fact = new ChunkProviderSettings.Factory();
+        //fact.coordinateScale *= 5;
+        //fact.heightScale /= 2;
+        //fact.mainNoiseScaleX *= 10;
+        //fact.mainNoiseScaleZ *= 10;
+        //fact.stretchY *= 6;
+        //fact.seaLevel = 64;
+        //fact.depthNoiseScaleX /= 10;
+        //fact.depthNoiseScaleZ /= 10;
+        fact.useLavaLakes = false;
+        fact.useWaterLakes = false;
+        fact.riverSize += 3;
+        //fact.lowerLimitScale *= 2;
+        //fact.upperLimitScale *= 2;
+        //fact.biomeScaleWeight /= 1.5;
+
+        this.settings = fact.func_177864_b();
+    }
+
+
+    /**
+     * RNG.
+     */
     private Random rand;
     private NoiseGeneratorOctaves field_147431_j;
     private NoiseGeneratorOctaves field_147432_k;
     private NoiseGeneratorOctaves field_147429_l;
     private NoiseGeneratorPerlin field_147430_m;
-    /** A NoiseGeneratorOctaves used in generating terrain */
+    /**
+     * A NoiseGeneratorOctaves used in generating terrain
+     */
     public NoiseGeneratorOctaves noiseGen5;
-    /** A NoiseGeneratorOctaves used in generating terrain */
+    /**
+     * A NoiseGeneratorOctaves used in generating terrain
+     */
     public NoiseGeneratorOctaves noiseGen6;
     public NoiseGeneratorOctaves mobSpawnerNoise;
-    /** Reference to the World object. */
+    /**
+     * Reference to the World object.
+     */
     private World worldObj;
-    /** are map structures going to be generated (e.g. strongholds) */
+    /**
+     * are map structures going to be generated (e.g. strongholds)
+     */
     private final boolean mapFeaturesEnabled;
     private WorldType field_177475_o;
     private final double[] field_147434_q;
@@ -105,27 +94,37 @@ public class ChunkProviderHighlands implements IChunkProvider{
     private Block field_177476_s;
     private double[] stoneNoise;
     private MapGenBase caveGenerator;
-    /** Holds Stronghold Generator */
+    /**
+     * Holds Stronghold Generator
+     */
     private MapGenStronghold strongholdGenerator;
-    /** Holds Village Generator */
+    /**
+     * Holds Village Generator
+     */
     private MapGenVillage villageGenerator;
-    /** Holds Mineshaft Generator */
+    /**
+     * Holds Mineshaft Generator
+     */
     private MapGenMineshaft mineshaftGenerator;
     private MapGenScatteredFeature scatteredFeatureGenerator;
-    /** Holds ravine generator */
+    /**
+     * Holds ravine generator
+     */
     private MapGenBase ravineGenerator;
     private StructureOceanMonument oceanMonumentGenerator;
-    /** The biomes that are used to generate the chunk */
+    /**
+     * The biomes that are used to generate the chunk
+     */
     private BiomeGenBase[] biomesForGeneration;
     double[] field_147427_d;
     double[] field_147428_e;
     double[] field_147425_f;
     double[] field_147426_g;
-	
-	public ChunkProviderHighlands(World worldIn, long seed, boolean mapFeaturesEnabled, String generatorOptions)
-	{
-		
-		this.field_177476_s = Blocks.water;
+
+    public ChunkProviderHighlands(World worldIn, long seed, boolean mapFeaturesEnabled, String generatorOptions)
+    {
+
+        this.field_177476_s = Blocks.water;
         this.stoneNoise = new double[256];
         this.caveGenerator = new MapGenCaves();
         this.strongholdGenerator = new MapGenStronghold();
@@ -136,12 +135,12 @@ public class ChunkProviderHighlands implements IChunkProvider{
         this.oceanMonumentGenerator = new StructureOceanMonument();
         {
             caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, CAVE);
-            strongholdGenerator = (MapGenStronghold)TerrainGen.getModdedMapGen(strongholdGenerator, STRONGHOLD);
-            villageGenerator = (MapGenVillage)TerrainGen.getModdedMapGen(villageGenerator, VILLAGE);
-            mineshaftGenerator = (MapGenMineshaft)TerrainGen.getModdedMapGen(mineshaftGenerator, MINESHAFT);
-            scatteredFeatureGenerator = (MapGenScatteredFeature)TerrainGen.getModdedMapGen(scatteredFeatureGenerator, SCATTERED_FEATURE);
+            strongholdGenerator = (MapGenStronghold) TerrainGen.getModdedMapGen(strongholdGenerator, STRONGHOLD);
+            villageGenerator = (MapGenVillage) TerrainGen.getModdedMapGen(villageGenerator, VILLAGE);
+            mineshaftGenerator = (MapGenMineshaft) TerrainGen.getModdedMapGen(mineshaftGenerator, MINESHAFT);
+            scatteredFeatureGenerator = (MapGenScatteredFeature) TerrainGen.getModdedMapGen(scatteredFeatureGenerator, SCATTERED_FEATURE);
             ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, RAVINE);
-            oceanMonumentGenerator = (StructureOceanMonument)TerrainGen.getModdedMapGen(oceanMonumentGenerator, OCEAN_MONUMENT);
+            oceanMonumentGenerator = (StructureOceanMonument) TerrainGen.getModdedMapGen(oceanMonumentGenerator, OCEAN_MONUMENT);
         }
         this.worldObj = worldIn;
         this.mapFeaturesEnabled = mapFeaturesEnabled;
@@ -161,9 +160,9 @@ public class ChunkProviderHighlands implements IChunkProvider{
         {
             for (int k = -2; k <= 2; ++k)
             {
-                float f = 10.0F / MathHelper.sqrt_float((float)(j * j + k * k) + 0.2F);
+                float f = 10.0F / MathHelper.sqrt_float((float) (j * j + k * k) + 0.2F);
                 this.parabolicField[j + 2 + (k + 2) * 5] = f;
-                
+
                 ////////////////////////////////////////
                 //System.out.println(this.parabolicField);
             }
@@ -178,21 +177,21 @@ public class ChunkProviderHighlands implements IChunkProvider{
 
         NoiseGenerator[] noiseGens = {field_147431_j, field_147432_k, field_147429_l, field_147430_m, noiseGen5, noiseGen6, mobSpawnerNoise};
         noiseGens = TerrainGen.getModdedNoiseGenerators(worldIn, this.rand, noiseGens);
-        this.field_147431_j = (NoiseGeneratorOctaves)noiseGens[0];
-        this.field_147432_k = (NoiseGeneratorOctaves)noiseGens[1];
-        this.field_147429_l = (NoiseGeneratorOctaves)noiseGens[2];
-        this.field_147430_m = (NoiseGeneratorPerlin)noiseGens[3];
-        this.noiseGen5 = (NoiseGeneratorOctaves)noiseGens[4];
-        this.noiseGen6 = (NoiseGeneratorOctaves)noiseGens[5];
-        this.mobSpawnerNoise = (NoiseGeneratorOctaves)noiseGens[6];
-	}
-	
+        this.field_147431_j = (NoiseGeneratorOctaves) noiseGens[0];
+        this.field_147432_k = (NoiseGeneratorOctaves) noiseGens[1];
+        this.field_147429_l = (NoiseGeneratorOctaves) noiseGens[2];
+        this.field_147430_m = (NoiseGeneratorPerlin) noiseGens[3];
+        this.noiseGen5 = (NoiseGeneratorOctaves) noiseGens[4];
+        this.noiseGen6 = (NoiseGeneratorOctaves) noiseGens[5];
+        this.mobSpawnerNoise = (NoiseGeneratorOctaves) noiseGens[6];
+    }
+
 	/*
 	 * COPIED DIRECTLY FROM CHUNKPROVIDERGENERATE
 	 * If this gets me in any legal trouble, blame Mojang for making all their fields private...
 	 */
-	
-	public void setBlocksInChunk(int p_180518_1_, int p_180518_2_, ChunkPrimer p_180518_3_)
+
+    public void setBlocksInChunk(int p_180518_1_, int p_180518_2_, ChunkPrimer p_180518_3_)
     {
         this.biomesForGeneration = this.worldObj.getWorldChunkManager().getBiomesForGeneration(this.biomesForGeneration, p_180518_1_ * 4 - 2, p_180518_2_ * 4 - 2, 10, 10);
         this.func_147423_a(p_180518_1_ * 4, 0, p_180518_2_ * 4);
@@ -268,7 +267,7 @@ public class ChunkProviderHighlands implements IChunkProvider{
         if (event.getResult() == Result.DENY) return;
 
         double d0 = 0.03125D;
-        this.stoneNoise = this.field_147430_m.func_151599_a(this.stoneNoise, (double)(p_180517_1_ * 16), (double)(p_180517_2_ * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
+        this.stoneNoise = this.field_147430_m.func_151599_a(this.stoneNoise, (double) (p_180517_1_ * 16), (double) (p_180517_2_ * 16), 16, 16, d0 * 2.0D, d0 * 2.0D, 1.0D);
 
         for (int k = 0; k < 16; ++k)
         {
@@ -286,7 +285,7 @@ public class ChunkProviderHighlands implements IChunkProvider{
      */
     public Chunk provideChunk(int x, int z)
     {
-        this.rand.setSeed((long)x * 341873128712L + (long)z * 132897987541L);
+        this.rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
         ChunkPrimer chunkprimer = new ChunkPrimer();
         this.setBlocksInChunk(x, z, chunkprimer);
         this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, x * 16, z * 16, 16, 16);
@@ -332,7 +331,7 @@ public class ChunkProviderHighlands implements IChunkProvider{
 
         for (int k = 0; k < abyte.length; ++k)
         {
-            abyte[k] = (byte)this.biomesForGeneration[k].biomeID;
+            abyte[k] = (byte) this.biomesForGeneration[k].biomeID;
         }
 
         chunk.generateSkylightMap();
@@ -341,12 +340,12 @@ public class ChunkProviderHighlands implements IChunkProvider{
 
     private void func_147423_a(int p_147423_1_, int p_147423_2_, int p_147423_3_)
     {
-        this.field_147426_g = this.noiseGen6.generateNoiseOctaves(this.field_147426_g, p_147423_1_, p_147423_3_, 5, 5, (double)this.settings.depthNoiseScaleX, (double)this.settings.depthNoiseScaleZ, (double)this.settings.depthNoiseScaleExponent);
+        this.field_147426_g = this.noiseGen6.generateNoiseOctaves(this.field_147426_g, p_147423_1_, p_147423_3_, 5, 5, (double) this.settings.depthNoiseScaleX, (double) this.settings.depthNoiseScaleZ, (double) this.settings.depthNoiseScaleExponent);
         float f = this.settings.coordinateScale;
         float f1 = this.settings.heightScale;
-        this.field_147427_d = this.field_147429_l.generateNoiseOctaves(this.field_147427_d, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, (double)(f / this.settings.mainNoiseScaleX), (double)(f1 / this.settings.mainNoiseScaleY), (double)(f / this.settings.mainNoiseScaleZ));
-        this.field_147428_e = this.field_147431_j.generateNoiseOctaves(this.field_147428_e, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, (double)f, (double)f1, (double)f);
-        this.field_147425_f = this.field_147432_k.generateNoiseOctaves(this.field_147425_f, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, (double)f, (double)f1, (double)f);
+        this.field_147427_d = this.field_147429_l.generateNoiseOctaves(this.field_147427_d, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, (double) (f / this.settings.mainNoiseScaleX), (double) (f1 / this.settings.mainNoiseScaleY), (double) (f / this.settings.mainNoiseScaleZ));
+        this.field_147428_e = this.field_147431_j.generateNoiseOctaves(this.field_147428_e, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, (double) f, (double) f1, (double) f);
+        this.field_147425_f = this.field_147432_k.generateNoiseOctaves(this.field_147425_f, p_147423_1_, p_147423_2_, p_147423_3_, 5, 33, 5, (double) f, (double) f1, (double) f);
         boolean flag1 = false;
         boolean flag = false;
         int l = 0;
@@ -369,9 +368,9 @@ public class ChunkProviderHighlands implements IChunkProvider{
                         BiomeGenBase biomegenbase1 = this.biomesForGeneration[j1 + l1 + 2 + (k1 + i2 + 2) * 10];
                         float f5 = this.settings.biomeDepthOffSet + biomegenbase1.minHeight * this.settings.biomeDepthWeight;
                         float f6 = this.settings.biomeScaleOffset + biomegenbase1.maxHeight * this.settings.biomeScaleWeight;
-                        
-                        if(biomegenbase1.minHeight > 0)f5 *= 2;
-                        if(biomegenbase1.maxHeight > 0)f6 *= 2;
+
+                        if (biomegenbase1.minHeight > 0) f5 *= 2;
+                        if (biomegenbase1.maxHeight > 0) f6 *= 2;
 
                         if (this.field_177475_o == WorldType.AMPLIFIED && f5 > 0.0F)
                         {
@@ -428,29 +427,29 @@ public class ChunkProviderHighlands implements IChunkProvider{
                 }
 
                 ++i1;
-                double d8 = (double)f3;
-                double d9 = (double)f2;
+                double d8 = (double) f3;
+                double d9 = (double) f2;
                 d8 += d7 * 0.2D;
-                d8 = d8 * (double)this.settings.baseSize / 8.0D;
-                double d0 = (double)this.settings.baseSize + d8 * 4.0D;
+                d8 = d8 * (double) this.settings.baseSize / 8.0D;
+                double d0 = (double) this.settings.baseSize + d8 * 4.0D;
 
                 for (int j2 = 0; j2 < 33; ++j2)
                 {
-                    double d1 = ((double)j2 - (d0)) * (double)this.settings.stretchY * 128.0D / 256.0D / d9;
+                    double d1 = ((double) j2 - (d0)) * (double) this.settings.stretchY * 128.0D / 256.0D / d9;
 
                     if (d1 < 0.0D)
                     {
                         d1 *= 4.0D;
                     }
 
-                    double d2 = this.field_147428_e[l] / (double)this.settings.lowerLimitScale;
-                    double d3 = this.field_147425_f[l] / (double)this.settings.upperLimitScale;
+                    double d2 = this.field_147428_e[l] / (double) this.settings.lowerLimitScale;
+                    double d3 = this.field_147425_f[l] / (double) this.settings.upperLimitScale;
                     double d4 = (this.field_147427_d[l] / 10.0D + 1.0D) / 2.0D;
                     double d5 = MathHelper.denormalizeClamp(d2, d3, d4) - d1;
 
                     if (j2 > 29)
                     {
-                        double d6 = (double)((float)(j2 - 29) / 3.0F);
+                        double d6 = (double) ((float) (j2 - 29) / 3.0F);
                         d5 = d5 * (1.0D - d6) + -10.0D * d6;
                     }
 
@@ -482,7 +481,7 @@ public class ChunkProviderHighlands implements IChunkProvider{
         this.rand.setSeed(this.worldObj.getSeed());
         long i1 = this.rand.nextLong() / 2L * 2L + 1L;
         long j1 = this.rand.nextLong() / 2L * 2L + 1L;
-        this.rand.setSeed((long)p_73153_2_ * i1 + (long)p_73153_3_ * j1 ^ this.worldObj.getSeed());
+        this.rand.setSeed((long) p_73153_2_ * i1 + (long) p_73153_3_ * j1 ^ this.worldObj.getSeed());
         boolean flag = false;
         ChunkCoordIntPair chunkcoordintpair = new ChunkCoordIntPair(p_73153_2_, p_73153_3_);
 
@@ -518,7 +517,7 @@ public class ChunkProviderHighlands implements IChunkProvider{
         int i2;
 
         if (biomegenbase != BiomeGenBase.desert && biomegenbase != BiomeGenBase.desertHills && this.settings.useWaterLakes && !flag && this.rand.nextInt(this.settings.waterLakeChance) == 0
-            && TerrainGen.populate(p_73153_1_, worldObj, rand, p_73153_2_, p_73153_3_, flag, LAKE))
+                && TerrainGen.populate(p_73153_1_, worldObj, rand, p_73153_2_, p_73153_3_, flag, LAKE))
         {
             k1 = this.rand.nextInt(16) + 8;
             l1 = this.rand.nextInt(256);
@@ -553,7 +552,7 @@ public class ChunkProviderHighlands implements IChunkProvider{
         biomegenbase.decorate(this.worldObj, this.rand, new BlockPos(k, 0, l));
         if (TerrainGen.populate(p_73153_1_, worldObj, rand, p_73153_2_, p_73153_3_, flag, ANIMALS))
         {
-        SpawnerAnimals.performWorldGenSpawning(this.worldObj, biomegenbase, k + 8, l + 8, 16, 16, this.rand);
+            SpawnerAnimals.performWorldGenSpawning(this.worldObj, biomegenbase, k + 8, l + 8, 16, 16, this.rand);
         }
         blockpos = blockpos.add(8, 0, 8);
 
@@ -607,7 +606,9 @@ public class ChunkProviderHighlands implements IChunkProvider{
      * Save extra data not associated with any Chunk.  Not saved during autosave, only during world unload.  Currently
      * unimplemented.
      */
-    public void saveExtraData() {}
+    public void saveExtraData()
+    {
+    }
 
     /**
      * Unloads chunks that are marked to be unloaded. This is not guaranteed to unload every such chunk.
@@ -667,27 +668,27 @@ public class ChunkProviderHighlands implements IChunkProvider{
     {
         if (this.settings.useMineShafts && this.mapFeaturesEnabled)
         {
-            this.mineshaftGenerator.func_175792_a(this, this.worldObj, p_180514_2_, p_180514_3_, (ChunkPrimer)null);
+            this.mineshaftGenerator.func_175792_a(this, this.worldObj, p_180514_2_, p_180514_3_, (ChunkPrimer) null);
         }
 
         if (this.settings.useVillages && this.mapFeaturesEnabled)
         {
-            this.villageGenerator.func_175792_a(this, this.worldObj, p_180514_2_, p_180514_3_, (ChunkPrimer)null);
+            this.villageGenerator.func_175792_a(this, this.worldObj, p_180514_2_, p_180514_3_, (ChunkPrimer) null);
         }
 
         if (this.settings.useStrongholds && this.mapFeaturesEnabled)
         {
-            this.strongholdGenerator.func_175792_a(this, this.worldObj, p_180514_2_, p_180514_3_, (ChunkPrimer)null);
+            this.strongholdGenerator.func_175792_a(this, this.worldObj, p_180514_2_, p_180514_3_, (ChunkPrimer) null);
         }
 
         if (this.settings.useTemples && this.mapFeaturesEnabled)
         {
-            this.scatteredFeatureGenerator.func_175792_a(this, this.worldObj, p_180514_2_, p_180514_3_, (ChunkPrimer)null);
+            this.scatteredFeatureGenerator.func_175792_a(this, this.worldObj, p_180514_2_, p_180514_3_, (ChunkPrimer) null);
         }
 
         if (this.settings.useMonuments && this.mapFeaturesEnabled)
         {
-            this.oceanMonumentGenerator.func_175792_a(this, this.worldObj, p_180514_2_, p_180514_3_, (ChunkPrimer)null);
+            this.oceanMonumentGenerator.func_175792_a(this, this.worldObj, p_180514_2_, p_180514_3_, (ChunkPrimer) null);
         }
     }
 
@@ -695,7 +696,6 @@ public class ChunkProviderHighlands implements IChunkProvider{
     {
         return this.provideChunk(blockPosIn.getX() >> 4, blockPosIn.getZ() >> 4);
     }
-	
-	
+
 
 }

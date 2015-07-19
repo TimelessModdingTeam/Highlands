@@ -1,7 +1,5 @@
 package com.sdj64.highlands.block;
 
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -14,6 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class OldBlockHighlandsPlanks extends Block
 {
@@ -31,7 +31,7 @@ public class OldBlockHighlandsPlanks extends Block
      */
     public int damageDropped(IBlockState state)
     {
-        return ((OldBlockHighlandsPlanks.EnumType)state.getValue(VARIANT)).getMetadata();
+        return ((OldBlockHighlandsPlanks.EnumType) state.getValue(VARIANT)).getMetadata();
     }
 
     /**
@@ -63,12 +63,12 @@ public class OldBlockHighlandsPlanks extends Block
      */
     public int getMetaFromState(IBlockState state)
     {
-        return ((OldBlockHighlandsPlanks.EnumType)state.getValue(VARIANT)).getMetadata();
+        return ((OldBlockHighlandsPlanks.EnumType) state.getValue(VARIANT)).getMetadata();
     }
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {VARIANT});
+        return new BlockState(this, new IProperty[]{VARIANT});
     }
 
     public static enum EnumType implements IStringSerializable

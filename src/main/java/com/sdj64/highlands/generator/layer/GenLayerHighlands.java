@@ -1,30 +1,36 @@
 package com.sdj64.highlands.generator.layer;
 
-import net.minecraft.world.gen.layer.*;
-
-import java.util.concurrent.Callable;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.util.ReportedException;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.gen.ChunkProviderSettings;
+import net.minecraft.world.gen.layer.*;
+import net.minecraftforge.common.BiomeManager;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.terraingen.WorldTypeEvent;
 
-import net.minecraftforge.common.*;
-import net.minecraftforge.event.terraingen.*;
+import java.util.concurrent.Callable;
 
 public abstract class GenLayerHighlands
 {
-    /** seed from World#getWorldSeed that is used in the LCG prng */
+    /**
+     * seed from World#getWorldSeed that is used in the LCG prng
+     */
     private long worldGenSeed;
-    /** parent GenLayer that was provided via the constructor */
+    /**
+     * parent GenLayer that was provided via the constructor
+     */
     protected GenLayer parent;
     /**
      * final part of the LCG prng that uses the chunk X, Z coords along with the other two seeds to generate
      * pseudorandom numbers
      */
     private long chunkSeed;
-    /** base seed to the LCG prng provided via the constructor */
+    /**
+     * base seed to the LCG prng provided via the constructor
+     */
     protected long baseSeed;
 
     public static GenLayer[] initializeAllBiomeGenerators(long p_180781_0_, WorldType p_180781_2_, String p_180781_3_)
@@ -79,25 +85,25 @@ public abstract class GenLayerHighlands
 
         for (int l = 0; l < j; ++l)
         {
-            object = new GenLayerZoom((long)(1000 + l), (GenLayer)object);
+            object = new GenLayerZoom((long) (1000 + l), (GenLayer) object);
 
             if (l == 0)
             {
-                object = new GenLayerAddIsland(3L, (GenLayer)object);
+                object = new GenLayerAddIsland(3L, (GenLayer) object);
             }
 
             if (l == 1 || j == 1)
             {
-                object = new GenLayerShore(1000L, (GenLayer)object);
+                object = new GenLayerShore(1000L, (GenLayer) object);
             }
         }
 
-        GenLayerSmooth genlayersmooth1 = new GenLayerSmooth(1000L, (GenLayer)object);
+        GenLayerSmooth genlayersmooth1 = new GenLayerSmooth(1000L, (GenLayer) object);
         GenLayerRiverMix genlayerrivermix = new GenLayerRiverMix(100L, genlayersmooth1, genlayersmooth);
         GenLayerVoronoiZoom genlayervoronoizoom = new GenLayerVoronoiZoom(10L, genlayerrivermix);
         genlayerrivermix.initWorldGenSeed(p_180781_0_);
         genlayervoronoizoom.initWorldGenSeed(p_180781_0_);
-        return new GenLayer[] {genlayerrivermix, genlayervoronoizoom, genlayerrivermix};
+        return new GenLayer[]{genlayerrivermix, genlayervoronoizoom, genlayerrivermix};
     }
 
     public GenLayerHighlands(long p_i2125_1_)
@@ -153,7 +159,7 @@ public abstract class GenLayerHighlands
      */
     protected int nextInt(int p_75902_1_)
     {
-        int j = (int)((this.chunkSeed >> 24) % (long)p_75902_1_);
+        int j = (int) ((this.chunkSeed >> 24) % (long) p_75902_1_);
 
         if (j < 0)
         {
@@ -226,7 +232,7 @@ public abstract class GenLayerHighlands
     /**
      * selects a random integer from a set of provided integers
      */
-    protected int selectRandom(int ... p_151619_1_)
+    protected int selectRandom(int... p_151619_1_)
     {
         return p_151619_1_[this.nextInt(p_151619_1_.length)];
     }
@@ -236,7 +242,7 @@ public abstract class GenLayerHighlands
      */
     protected int selectModeOrRandom(int p_151617_1_, int p_151617_2_, int p_151617_3_, int p_151617_4_)
     {
-        return p_151617_2_ == p_151617_3_ && p_151617_3_ == p_151617_4_ ? p_151617_2_ : (p_151617_1_ == p_151617_2_ && p_151617_1_ == p_151617_3_ ? p_151617_1_ : (p_151617_1_ == p_151617_2_ && p_151617_1_ == p_151617_4_ ? p_151617_1_ : (p_151617_1_ == p_151617_3_ && p_151617_1_ == p_151617_4_ ? p_151617_1_ : (p_151617_1_ == p_151617_2_ && p_151617_3_ != p_151617_4_ ? p_151617_1_ : (p_151617_1_ == p_151617_3_ && p_151617_2_ != p_151617_4_ ? p_151617_1_ : (p_151617_1_ == p_151617_4_ && p_151617_2_ != p_151617_3_ ? p_151617_1_ : (p_151617_2_ == p_151617_3_ && p_151617_1_ != p_151617_4_ ? p_151617_2_ : (p_151617_2_ == p_151617_4_ && p_151617_1_ != p_151617_3_ ? p_151617_2_ : (p_151617_3_ == p_151617_4_ && p_151617_1_ != p_151617_2_ ? p_151617_3_ : this.selectRandom(new int[] {p_151617_1_, p_151617_2_, p_151617_3_, p_151617_4_}))))))))));
+        return p_151617_2_ == p_151617_3_ && p_151617_3_ == p_151617_4_ ? p_151617_2_ : (p_151617_1_ == p_151617_2_ && p_151617_1_ == p_151617_3_ ? p_151617_1_ : (p_151617_1_ == p_151617_2_ && p_151617_1_ == p_151617_4_ ? p_151617_1_ : (p_151617_1_ == p_151617_3_ && p_151617_1_ == p_151617_4_ ? p_151617_1_ : (p_151617_1_ == p_151617_2_ && p_151617_3_ != p_151617_4_ ? p_151617_1_ : (p_151617_1_ == p_151617_3_ && p_151617_2_ != p_151617_4_ ? p_151617_1_ : (p_151617_1_ == p_151617_4_ && p_151617_2_ != p_151617_3_ ? p_151617_1_ : (p_151617_2_ == p_151617_3_ && p_151617_1_ != p_151617_4_ ? p_151617_2_ : (p_151617_2_ == p_151617_4_ && p_151617_1_ != p_151617_3_ ? p_151617_2_ : (p_151617_3_ == p_151617_4_ && p_151617_1_ != p_151617_2_ ? p_151617_3_ : this.selectRandom(new int[]{p_151617_1_, p_151617_2_, p_151617_3_, p_151617_4_}))))))))));
     }
 
     /* ======================================== FORGE START =====================================*/

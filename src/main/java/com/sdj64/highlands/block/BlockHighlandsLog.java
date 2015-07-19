@@ -5,45 +5,45 @@ import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class BlockHighlandsLog extends BlockLog
 {
 
-	private HighlandsBlocks.EnumType treeType;
-	
+    private HighlandsBlocks.EnumType treeType;
+
     public BlockHighlandsLog(HighlandsBlocks.EnumType type, String treeName)
     {
         this.setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
         setHardness(2.0F);
-    	setResistance(0.5F);
-    	setStepSound(Block.soundTypeWood);
+        setResistance(0.5F);
+        setStepSound(Block.soundTypeWood);
         setUnlocalizedName(treeName + "_log");
-        
+
         this.setCreativeTab(HighlandsBlocks.tabHighlands);
-        
+
         treeType = type;
-        
-        if(type.equals(HighlandsBlocks.EnumType.BAMBOO)){
+
+        if (type.equals(HighlandsBlocks.EnumType.BAMBOO))
+        {
             this.setBlockBounds(0.375F, 0.0F, 0.375F, 0.625F, 1.0F, 0.625F);
             this.setLightOpacity(1);
             setHardness(1.0F);
         }
-        
-        
+
+
     }
-    
+
     public boolean isOpaqueCube()
     {
-    	if(treeType == null)return true;
+        if (treeType == null) return true;
         return !treeType.equals(HighlandsBlocks.EnumType.BAMBOO);
     }
 
     public boolean isFullCube()
     {
-    	if(treeType == null)return true;
+        if (treeType == null) return true;
         return !treeType.equals(HighlandsBlocks.EnumType.BAMBOO);
     }
 
@@ -77,9 +77,9 @@ public class BlockHighlandsLog extends BlockLog
      */
     public int getMetaFromState(IBlockState state)
     {
-    	int i = 0;
-    	
-        switch (BlockHighlandsLog.SwitchEnumAxis.AXIS_LOOKUP[((BlockLog.EnumAxis)state.getValue(LOG_AXIS)).ordinal()])
+        int i = 0;
+
+        switch (BlockHighlandsLog.SwitchEnumAxis.AXIS_LOOKUP[((BlockLog.EnumAxis) state.getValue(LOG_AXIS)).ordinal()])
         {
             case 1:
                 i = 4;
@@ -96,7 +96,7 @@ public class BlockHighlandsLog extends BlockLog
 
     protected BlockState createBlockState()
     {
-        return new BlockState(this, new IProperty[] {LOG_AXIS});
+        return new BlockState(this, new IProperty[]{LOG_AXIS});
     }
 
     protected ItemStack createStackedBlock(IBlockState state)
@@ -113,37 +113,37 @@ public class BlockHighlandsLog extends BlockLog
     }
 
     static final class SwitchEnumAxis
+    {
+        static final int[] AXIS_LOOKUP = new int[BlockLog.EnumAxis.values().length];
+
+        static
         {
-            static final int[] AXIS_LOOKUP = new int[BlockLog.EnumAxis.values().length];
-
-            static
+            try
             {
-                try
-                {
-                    AXIS_LOOKUP[BlockLog.EnumAxis.X.ordinal()] = 1;
-                }
-                catch (NoSuchFieldError var3)
-                {
-                    ;
-                }
+                AXIS_LOOKUP[BlockLog.EnumAxis.X.ordinal()] = 1;
+            }
+            catch (NoSuchFieldError var3)
+            {
+                ;
+            }
 
-                try
-                {
-                    AXIS_LOOKUP[BlockLog.EnumAxis.Z.ordinal()] = 2;
-                }
-                catch (NoSuchFieldError var2)
-                {
-                    ;
-                }
+            try
+            {
+                AXIS_LOOKUP[BlockLog.EnumAxis.Z.ordinal()] = 2;
+            }
+            catch (NoSuchFieldError var2)
+            {
+                ;
+            }
 
-                try
-                {
-                    AXIS_LOOKUP[BlockLog.EnumAxis.NONE.ordinal()] = 3;
-                }
-                catch (NoSuchFieldError var1)
-                {
-                    ;
-                }
+            try
+            {
+                AXIS_LOOKUP[BlockLog.EnumAxis.NONE.ordinal()] = 3;
+            }
+            catch (NoSuchFieldError var1)
+            {
+                ;
             }
         }
+    }
 }

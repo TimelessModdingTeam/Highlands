@@ -1,34 +1,24 @@
 package com.sdj64.highlands.biome;
 
-import java.util.Random;
-
-import com.sdj64.highlands.HighlandsMod;
 import com.sdj64.highlands.generator.HighlandsGenerators;
-
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.BiomeDecorator;
-import net.minecraft.block.BlockTallGrass;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
-import net.minecraft.world.gen.feature.WorldGenTrees;
-import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraft.world.gen.feature.WorldGenTallGrass;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 public class BiomeGenBadlands extends BiomeGenBaseHighlands
 {
 
-	public BiomeGenBadlands(int par1)
+    public BiomeGenBadlands(int par1)
     {
         super(par1);
-        
+
         theBiomeDecorator.treesPerChunk = 1;
         theBiomeDecorator.grassPerChunk = 6;
         theBiomeDecorator.flowersPerChunk = 1;
-        
+
         this.maxHeight = 0.6F;
         this.minHeight = 0.3F;
         this.temperature = 0.6F;
@@ -46,9 +36,9 @@ public class BiomeGenBadlands extends BiomeGenBaseHighlands
     public void decorate(World world, Random random, BlockPos pos)
     {
         genStandardOre(6, HighlandsGenerators.stoneInDirt, 64, 128, world, random, pos);
-    	
+
         super.decorate(world, random, pos);
-        
+
         int i = 3 + random.nextInt(6);
         int j;
         int k;
@@ -67,8 +57,8 @@ public class BiomeGenBadlands extends BiomeGenBaseHighlands
             }
         }
     }
-    
-    
+
+
     public int getModdedBiomeGrassColor(int original)
     {
         return 0xCCB978;
